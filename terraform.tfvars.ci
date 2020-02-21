@@ -1,0 +1,15 @@
+location="fr-central"
+location_short="frc"
+client_name="test"
+environment="test"
+stack="ci"
+resource_group_name="ci"
+sku="Basic"
+eventhub_namespaces_hubs = {
+    eventhub1 = {
+      hubs = {
+        hub1 = {}
+        hub2 = {}
+      }
+    }
+}
