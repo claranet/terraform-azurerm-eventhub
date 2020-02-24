@@ -39,7 +39,7 @@ module "rg" {
 }
 
 module "eventhub" {
-  source  = "claranet/service_bus/azurerm"
+  source  = "claranet/eventhub/azurerm"
   version = "x.x.x"
 
   location       = module.azure-region.location
@@ -62,35 +62,22 @@ module "eventhub" {
       }
     }
 
-    # Or customize everything
     eventhub2 = {
-      custom_name = format("%s-%s-%s-custom", var.stack, var.client_name, module.azure-region.location_short)
-      sku         = "Premium"
-      capacity    = 2
-
+      custom_name          = "testeventhub"
+      sku                  = "Standard"
+      capacity             = 1
+      auto_inflate_enabled = true
+      reader               = true
       hubs = {
-        hub100 = {
-          reader = true
-          sender = true
-          manage = true
-        }
-        hub200 = {
-          dead_lettering_on_message_expiration = true
-          default_message_ttl                  = "PT10M"
-          reader                               = true
-        }
-        hub300 = {
-          duplicate_detection_history_time_window = "PT30M"
-          sender                                  = true
-        }
-        hub400 = {  
-          requires_duplicate_detection = true
-          manage                       = true
+        hubcentdeux = {
+          message_retention = 7
+          partition_count   = 2
+          sender            = true
+          manage            = true
         }
       }
     }
   }
-}
 }
 ```
 
@@ -98,24 +85,27 @@ module "eventhub" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
-| client\_name | Client name/account used in naming | `string` | n/a | yes | 
-| environment | Project environment | `string` | n/a | yes |
+| client\_name | Client name/account used in naming | `string` | n/a | yes |
+| environment | Project environment | `string` | n/a | yes | 
+| eventhub\_namespaces\_hubs | Map to handle Eventhub creation. It supports the creation of the hubs, authorization\_rule associated with each namespace you create | `any` | n/a | yes |
 | extra\_tags | Extra tags to add | `map(string)` | `{}` | no |
-| location | Azure location for eventhub. | `string` | n/a | yes |
+| location | Azure location for Eventhub. | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
 | resource\_group\_name | Name of the resource group | `string` | n/a | yes |
-| eventhub\_namespaces\_hubs | Map to handle eventhub creation. It supports the creation of the hubs, authorization\_rule associated with each namespace you create | `any` | n/a | yes |
 | stack | Project stack name | `string` | n/a | yes |
 
-## Outputs 
+## Outputs
 
 | Name | Description |
 |------|-------------|
-| manages | Map of the manages access policies |
-| namespaces | Map of the namespaces |
 | hubs | Map of the hubs |
-| readers | Map of the readers access policies |
-| senders | Map of the senders access policies |
+| hubs\_manages | Map of the Hubs manages access policies |
+| hubs\_readers | Map of the Hubs readers access policies |
+| hubs\_senders | Map of the Hubs senders access policies |
+| namespaces | Map of the namespaces | 
+| namespaces\_manages | Map of the namespaces manages access policies |
+| namespaces\_readers | Map of the namespaces readers access policies |
+| namespaces\_senders | Map of the namespaces senders access policies |
 
 ## Related documentation
 
