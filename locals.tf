@@ -16,6 +16,22 @@ locals {
     ]
   )
 
+  # Generate a list of namespaces to create shared access policies with reader right
+  namespaces_reader = [for namespace, values in var.eventhub_namespaces_hubs :
+    "${namespace}" if lookup(var.eventhub_namespaces_hubs[namespace], "reader", false)
+  ]
+
+
+  # Generate a list of namespaces to create shared access policies with sender right
+  namespaces_sender = [for namespace, values in var.eventhub_namespaces_hubs :
+    "${namespace}" if lookup(var.eventhub_namespaces_hubs[namespace], "sender", false)
+  ]
+
+  # Generate a list of namespaces to create shared access policies with manage right
+  namespaces_manage = [for namespace, values in var.eventhub_namespaces_hubs :
+    "${namespace}" if lookup(var.eventhub_namespaces_hubs[namespace], "manage", false)
+  ]
+
   # Generate a list of hubs to create shared access policies with reader right
   hubs_reader = flatten(
     [for namespace, values in var.eventhub_namespaces_hubs :

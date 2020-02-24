@@ -15,29 +15,56 @@ output "hubs" {
   }
 }
 
-# output "senders" {
-#   description = "Map of the senders access policies"
-#   value = {
-#     for namespace, config in var.servicebus_namespaces_hubs :
-#     namespace => { for queue in local.hubs_sender :
-#     azurerm_servicebus_queue_authorization_rule.sender[queue].name => azurerm_servicebus_queue_authorization_rule.sender[queue].primary_connection_string if split("|", queue)[0] == namespace }
-#   }
-# }
+output "namespaces_senders" {
+  description = "Map of the namespaces senders access policies"
+  value = {
+    for namespace, config in var.eventhub_namespaces_hubs :
+    namespace => { for eventhub in local.namespaces_sender :
+    azurerm_eventhub_namespace_authorization_rule.sender[eventhub].name => azurerm_eventhub_namespace_authorization_rule.sender[eventhub].primary_connection_string if eventhub == namespace }
+  }
+}
 
-# output "readers" {
-#   description = "Map of the readers access policies"
-#   value = {
-#     for namespace, config in var.servicebus_namespaces_hubs :
-#     namespace => { for queue in local.hubs_reader :
-#     azurerm_servicebus_queue_authorization_rule.reader[queue].name => azurerm_servicebus_queue_authorization_rule.reader[queue].primary_connection_string if split("|", queue)[0] == namespace }
-#   }
-# }
+output "namespaces_readers" {
+  description = "Map of the namespaces readers access policies"
+  value = {
+    for namespace, config in var.eventhub_namespaces_hubs :
+    namespace => { for eventhub in local.namespaces_reader :
+    azurerm_eventhub_namespace_authorization_rule.reader[eventhub].name => azurerm_eventhub_namespace_authorization_rule.reader[eventhub].primary_connection_string if eventhub == namespace }
+  }
+}
 
-# output "manages" {
-#   description = "Map of the manages access policies"
-#   value = {
-#     for namespace, config in var.servicebus_namespaces_hubs :
-#     namespace => { for queue in local.hubs_manage :
-#     azurerm_servicebus_queue_authorization_rule.manage[queue].name => azurerm_servicebus_queue_authorization_rule.manage[queue].primary_connection_string if split("|", queue)[0] == namespace }
-#   }
-# }
+output "namespaces_manages" {
+  description = "Map of the namespaces manages access policies"
+  value = {
+    for namespace, config in var.eventhub_namespaces_hubs :
+    namespace => { for eventhub in local.namespaces_manage :
+    azurerm_eventhub_namespace_authorization_rule.manage[eventhub].name => azurerm_eventhub_namespace_authorization_rule.manage[eventhub].primary_connection_string if eventhub == namespace }
+  }
+}
+
+output "hubs_senders" {
+  description = "Map of the Hubs senders access policies"
+  value = {
+    for namespace, config in var.eventhub_namespaces_hubs :
+    namespace => { for hub in local.hubs_sender :
+    azurerm_eventhub_authorization_rule.sender[hub].name => azurerm_eventhub_authorization_rule.sender[hub].primary_connection_string if split("|", hub)[0] == namespace }
+  }
+}
+
+output "hubs_readers" {
+  description = "Map of the Hubs readers access policies"
+  value = {
+    for namespace, config in var.eventhub_namespaces_hubs :
+    namespace => { for hub in local.hubs_reader :
+    azurerm_eventhub_authorization_rule.reader[hub].name => azurerm_eventhub_authorization_rule.reader[hub].primary_connection_string if split("|", hub)[0] == namespace }
+  }
+}
+
+output "hubs_manages" {
+  description = "Map of the Hubs manages access policies"
+  value = {
+    for namespace, config in var.eventhub_namespaces_hubs :
+    namespace => { for hub in local.hubs_manage :
+    azurerm_eventhub_authorization_rule.manage[hub].name => azurerm_eventhub_authorization_rule.manage[hub].primary_connection_string if split("|", hub)[0] == namespace }
+  }
+}
