@@ -109,7 +109,7 @@ module "eventhub" {
 
 ## Related documentation
 
-Terraform resource documentation on Eventhub namespace: [https://www.terraform.io/docs/providers/azurerm/r/eventhub_namespace.html](https://www.https://www.terraform.io/docs/providers/azurerm/r/eventhub_namespace.html)
-Terraform resource documentation on Eventhub hub: [https://www.terraform.io/docs/providers/azurerm/r/eventhub.html](https://www.https://www.terraform.io/docs/providers/azurerm/r/eventhub.html)
+Terraform resource documentation on Eventhub namespace: [www.terraform.io/docs/providers/azurerm/r/eventhub_namespace.html](https://www.terraform.io/docs/providers/azurerm/r/eventhub_namespace.html)
+Terraform resource documentation on Eventhub hub: [www.terraform.io/docs/providers/azurerm/r/eventhub.html](https://www.terraform.io/docs/providers/azurerm/r/eventhub.html)
 
-Microsoft Azure documentation: [https://docs.microsoft.com/en-us/azure/event-hubs/](https://docs.microsoft.com/en-us/azure/event-hubs/)
+Microsoft Azure documentation: [docs.microsoft.com/en-us/azure/event-hubs/](https://docs.microsoft.com/en-us/azure/event-hubs/)
