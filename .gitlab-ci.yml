@@ -1,38 +1,6 @@
-image:
-  name: hashicorp/terraform:0.12.21
-
-stages:
-  - validate
-
-tffmt:
-  stage: validate
-  tags:
-    - default
-  script:
-    - terraform fmt -write=false -diff -check
-
-tfvalidate azurerm 1.x:
-  stage: validate
-  tags:
-    - default
-  script:
-    - mv main.tf.ci_1.x main.tf
-    - mv terraform.tfvars.ci terraform.tfvars
-    - terraform init
-    - terraform validate
-  rules:
-    - exists:
-      - main.tf.ci_1.x
-
-tfvalidate azurerm 2.x:
-  stage: validate
-  tags:
-    - default
-  script:
-    - mv main.tf.ci_2.x main.tf
-    - mv terraform.tfvars.ci terraform.tfvars
-    - terraform init
-    - terraform validate
-  rules:
-    - exists:
-      - main.tf.ci_2.x
+---
+  include:
+    - project: 'claranet/projects/cloud/azure/terraform/ci'
+      ref: master
+      file: '/validate.yml'
+...
