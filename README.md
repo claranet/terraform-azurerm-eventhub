@@ -8,9 +8,12 @@ This Terraform module creates an [Azure Eventhub](https://docs.microsoft.com/en-
 
 ## Terraform version compatibility
 
-| Module version | Terraform version |
-|----------------|-------------------|
-| x.x.x          | 0.12.20           |
+| Module version    | Terraform version | AzureRM version |
+|-------------------|-------------------|-----------------|
+| >= 3.x.x          | 0.12.x            | >= 2.0          |
+| >= 2.x.x, < 3.x.x | 0.12.x            | <  2.0          |
+| <  2.x.x          | 0.11.x            | <  2.0          |
+
 
 ## Usage
 
