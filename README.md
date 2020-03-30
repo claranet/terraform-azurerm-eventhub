@@ -1,4 +1,5 @@
 # Azure Eventhub feature
+[![Changelog](https://img.shields.io/badge/changelog-release-green.svg)](CHANGELOG.md) [![Notice](https://img.shields.io/badge/notice-copyright-yellow.svg)](NOTICE) [![Apache V2 License](https://img.shields.io/badge/license-Apache%20V2-orange.svg)](LICENSE) [![TF Registry](https://img.shields.io/badge/terraform-registry-blue.svg)](https://registry.terraform.io/modules/claranet/eventhub/azurerm/)
 
 This Terraform module creates an [Azure Eventhub](https://docs.microsoft.com/en-us/azure/event-hubs/).
 
@@ -6,14 +7,13 @@ This Terraform module creates an [Azure Eventhub](https://docs.microsoft.com/en-
 
 * [AzureRM Terraform provider](https://www.terraform.io/docs/providers/azurerm/) >= 1.32
 
-## Terraform version compatibility
+## Version compatibility
 
 | Module version    | Terraform version | AzureRM version |
 |-------------------|-------------------|-----------------|
 | >= 3.x.x          | 0.12.x            | >= 2.0          |
 | >= 2.x.x, < 3.x.x | 0.12.x            | <  2.0          |
 | <  2.x.x          | 0.11.x            | <  2.0          |
-
 
 ## Usage
 
