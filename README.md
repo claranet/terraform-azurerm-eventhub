@@ -9,11 +9,12 @@ This Terraform module creates an [Azure Eventhub](https://docs.microsoft.com/en-
 
 ## Version compatibility
 
-| Module version    | Terraform version | AzureRM version |
-|-------------------|-------------------|-----------------|
-| >= 3.x.x          | 0.12.x            | >= 2.0          |
-| >= 2.x.x, < 3.x.x | 0.12.x            | <  2.0          |
-| <  2.x.x          | 0.11.x            | <  2.0          |
+| Module version | Terraform version | AzureRM version |
+|----------------|-------------------| --------------- |
+| >= 4.x.x       | 0.13.x            | >= 2.0          |
+| >= 3.x.x       | 0.12.x            | >= 2.0          |
+| >= 2.x.x       | 0.12.x            | < 2.0           |
+| <  2.x.x       | 0.11.x            | < 2.0           |
 
 ## Usage
 
@@ -87,9 +88,9 @@ module "eventhub" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | client\_name | Client name/account used in naming | `string` | n/a | yes |
-| environment | Project environment | `string` | n/a | yes | 
+| environment | Project environment | `string` | n/a | yes |
 | eventhub\_namespaces\_hubs | Map to handle Eventhub creation. It supports the creation of the hubs, authorization\_rule associated with each namespace you create | `any` | n/a | yes |
 | extra\_tags | Extra tags to add | `map(string)` | `{}` | no |
 | location | Azure location for Eventhub. | `string` | n/a | yes |
@@ -105,7 +106,7 @@ module "eventhub" {
 | hubs\_manages | Map of the Hubs manages access policies |
 | hubs\_readers | Map of the Hubs readers access policies |
 | hubs\_senders | Map of the Hubs senders access policies |
-| namespaces | Map of the namespaces | 
+| namespaces | Map of the namespaces |
 | namespaces\_manages | Map of the namespaces manages access policies |
 | namespaces\_readers | Map of the namespaces readers access policies |
 | namespaces\_senders | Map of the namespaces senders access policies |
