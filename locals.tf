@@ -4,9 +4,6 @@ locals {
     stack = var.stack
   }
 
-  # Generate a default name
-  default_name = "${var.stack}-${var.client_name}-${var.location_short}-${var.environment}"
-
   # Generate a list of hubs to create
   hubs_list = flatten(
     [for namespace, values in var.eventhub_namespaces_hubs :
