@@ -4,6 +4,9 @@ Breaking
   * AZ-515: Option to use Azure CAF naming provider to name resources
   * AZ-515: Require Terraform 0.13+
 
+Added
+  * AZ-589: Add and enable `diagnostics` for each Event Hub namespace
+
 Changed
   * AZ-572: Revamp examples and improve CI
 
