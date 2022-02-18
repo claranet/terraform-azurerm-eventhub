@@ -1,7 +1,7 @@
 resource "azurerm_eventhub_namespace" "eventhub_namespace" {
   for_each = var.eventhub_namespaces_hubs
 
-  name                = lookup(each.value, "custom_name", format("%s-%s-eh", local.default_name, each.key))
+  name                = lookup(each.value, "custom_name", azurecaf_name.eventhub_namespace[each.key].result)
   resource_group_name = var.resource_group_name
   location            = var.location
 
