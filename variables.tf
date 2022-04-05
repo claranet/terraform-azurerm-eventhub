@@ -29,12 +29,6 @@ variable "location_short" {
   type        = string
 }
 
-variable "extra_tags" {
-  description = "Extra tags to add"
-  type        = map(string)
-  default     = {}
-}
-
 variable "eventhub_namespaces_hubs" {
   type        = any
   description = "Map to handle Eventhub creation. It supports the creation of the hubs, authorization_rule associated with each namespace you create"
