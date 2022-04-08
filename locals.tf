@@ -1,9 +1,4 @@
 locals {
-  default_tags = {
-    env   = var.environment
-    stack = var.stack
-  }
-
   # Generate a list of hubs to create
   hubs_list = flatten(
     [for namespace, values in var.eventhub_namespaces_hubs :
