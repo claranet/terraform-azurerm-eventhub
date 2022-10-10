@@ -1,3 +1,11 @@
+# Unreleased
+
+Breaking
+  * AZ-840: Require Terraform 1.3+
+
+Changed
+  * AZ-596: Code lint and refactor
+
 # v5.1.0 - 2022-04-08
 
 Added

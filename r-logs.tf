@@ -1,6 +1,6 @@
 module "diagnostics" {
   source  = "claranet/diagnostic-settings/azurerm"
-  version = "5.0.0"
+  version = "6.0.0"
 
   for_each = var.eventhub_namespaces_hubs
 
