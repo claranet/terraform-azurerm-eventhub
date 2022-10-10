@@ -1,53 +1,14 @@
 locals {
-  # Generate a list of hubs to create
-  hubs_list = flatten(
-    [for namespace, values in var.eventhub_namespaces_hubs :
-      [for hubname in keys(lookup(values, "hubs", {})) :
-        "${namespace}|${hubname}"
-      ]
-    ]
-  )
+  default_tags = {
+    environment = var.environment
+    application = var.application
+    business    = var.business
+  }
 
-  # Generate a list of namespaces to create shared access policies with reader right
-  namespaces_reader = [for namespace, values in var.eventhub_namespaces_hubs :
-    namespace if lookup(var.eventhub_namespaces_hubs[namespace], "reader", false)
-  ]
+  enforced_tags = {
+    sg_Resource_ControlTower_Profile         = var.namespace_is_public ? "Public" : "Private" # EVT-HUB-01
+    sg_Resource_ControlTower_Confidentiality = "C2"                                           # EVT-HUB-10
+  }
 
-
-  # Generate a list of namespaces to create shared access policies with sender right
-  namespaces_sender = [for namespace, values in var.eventhub_namespaces_hubs :
-    namespace if lookup(var.eventhub_namespaces_hubs[namespace], "sender", false)
-  ]
-
-  # Generate a list of namespaces to create shared access policies with manage right
-  namespaces_manage = [for namespace, values in var.eventhub_namespaces_hubs :
-    namespace if lookup(var.eventhub_namespaces_hubs[namespace], "manage", false)
-  ]
-
-  # Generate a list of hubs to create shared access policies with reader right
-  hubs_reader = flatten(
-    [for namespace, values in var.eventhub_namespaces_hubs :
-      [for hubname, params in lookup(values, "hubs", {}) :
-        "${namespace}|${hubname}" if lookup(params, "reader", false)
-      ]
-    ]
-  )
-
-  # Generate a list of hubs to create shared access policies with sender right
-  hubs_sender = flatten(
-    [for namespace, values in var.eventhub_namespaces_hubs :
-      [for hubname, params in lookup(values, "hubs", {}) :
-        "${namespace}|${hubname}" if lookup(params, "sender", false)
-      ]
-    ]
-  )
-
-  # Generate a list of hubs to create shared access policies with manage right
-  hubs_manage = flatten(
-    [for namespace, values in var.eventhub_namespaces_hubs :
-      [for hubname, params in lookup(values, "hubs", {}) :
-        "${namespace}|${hubname}" if lookup(params, "manage", false)
-      ]
-    ]
-  )
+  tags = merge(local.default_tags, var.extra_tags, local.enforced_tags)
 }
