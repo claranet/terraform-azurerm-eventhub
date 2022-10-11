@@ -84,6 +84,16 @@ variable "namespace_network_rules" {
   }))
 }
 
+variable "namespace_authorizations" {
+  description = "Object to specify which Namespace authorizations need to be created."
+  type = object({
+    listen = optional(bool, true)
+    send   = optional(bool, true)
+    manage = optional(bool, true)
+  })
+  default = {}
+}
+
 # EventHubs
 
 variable "hubs_parameters" {
