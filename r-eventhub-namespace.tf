@@ -1,3 +1,12 @@
+resource "azurerm_eventhub_cluster" "cluster" {
+  for_each = toset(var.cluster_enabled ? ["enabled"] : [])
+
+  name                = format("%s-cluster", local.namespace_name)
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  sku_name            = "Dedicated_1"
+}
+
 resource "azurerm_eventhub_namespace" "eventhub" {
   name                = local.namespace_name
   resource_group_name = var.resource_group_name
@@ -6,7 +15,7 @@ resource "azurerm_eventhub_namespace" "eventhub" {
   sku                  = var.namespace_parameters.sku
   capacity             = var.namespace_parameters.capacity
   auto_inflate_enabled = var.namespace_parameters.auto_inflate_enabled
-  dedicated_cluster_id = var.namespace_parameters.dedicated_cluster_id
+  dedicated_cluster_id = var.cluster_enabled ? azurerm_eventhub_cluster.cluster["enabled"].id : var.namespace_parameters.dedicated_cluster_id
 
   identity {
     type = "SystemAssigned"

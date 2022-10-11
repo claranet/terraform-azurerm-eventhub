@@ -30,7 +30,13 @@ variable "location_short" {
   type        = string
 }
 
-# EventHub Namespace
+# EventHub Namespace & Cluster
+variable "cluster_enabled" {
+  description = "If `true`, an EventHub Cluster is created and associated to the Namespace."
+  type        = bool
+  default     = false
+}
+
 variable "namespace_parameters" {
   description = <<EOD
 EventHub namespace parameters.

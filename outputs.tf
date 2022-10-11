@@ -13,11 +13,6 @@ output "environment" {
   value       = var.environment
 }
 
-output "tags" {
-  description = "Tags set on resources"
-  value       = local.tags
-}
-
 output "id" {
   description = "Azure Event Hub ID"
   value       = azurerm_eventhub.eventhub.id
