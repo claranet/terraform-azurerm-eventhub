@@ -120,9 +120,9 @@ module "eventhub" {
 | [azurecaf_name.consumer_group](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [azurecaf_name.eventhub](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [azurecaf_name.eventhub_namespace](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
+| [azurecaf_name.eventhub_namespace_auth_rule_listen](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [azurecaf_name.eventhub_namespace_auth_rule_manage](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
-| [azurecaf_name.eventhub_namespace_auth_rule_reader](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
-| [azurecaf_name.eventhub_namespace_auth_rule_sender](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
+| [azurecaf_name.eventhub_namespace_auth_rule_send](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [azurerm_eventhub.eventhub](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub) | resource |
 | [azurerm_eventhub_cluster.cluster](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_cluster) | resource |
 | [azurerm_eventhub_consumer_group.eventhub_consumer_group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_consumer_group) | resource |
@@ -151,7 +151,8 @@ module "eventhub" {
 | logs\_retention\_days | Number of days to keep logs on storage account | `number` | `30` | no |
 | name\_prefix | Optional prefix for the generated name | `string` | `""` | no |
 | name\_suffix | Optional suffix for the generated name | `string` | `""` | no |
-| namespace\_network\_rules | `network_rulesets` map block as defined below. | <pre>map(object({<br>    default_action                 = optional(string, "Deny")<br>    trusted_service_access_enabled = optional(bool, true)<br>    virtual_network_rules = optional(list(object({<br>      subnet_id                                       = string<br>      ignore_missing_virtual_network_service_endpoint = optional(bool, false)<br>    })), [])<br>    ip_rules = optional(list(object({<br>      ip_mask = string<br>      action  = optional(string, "Allow")<br>    })), [])<br>  }))</pre> | `{}` | no |
+| namespace\_authorizations | Object to specify which Namespace authorizations need to be created. | <pre>object({<br>    listen = optional(bool, true)<br>    send   = optional(bool, true)<br>    manage = optional(bool, true)<br>  })</pre> | `{}` | no |
+| namespace\_network\_rules | `network_rulesets` block as defined below. | <pre>object({<br>    default_action                 = optional(string, "Deny")<br>    trusted_service_access_enabled = optional(bool, true)<br>    virtual_network_rules = optional(list(object({<br>      subnet_id                                       = string<br>      ignore_missing_virtual_network_service_endpoint = optional(bool, false)<br>    })), [])<br>    ip_rules = optional(list(object({<br>      ip_mask = string<br>      action  = optional(string, "Allow")<br>    })), [])<br>  })</pre> | `null` | no |
 | namespace\_parameters | EventHub Namespace parameters.<br> * sku:                  Defines which tier to use. Valid options are `Basic`, `Standard`, and `Premium`. Please not that setting this field to Premium will force the creation of a new resource and also requires setting zone\_redundant to true.<br> * capacity:             Specifies the Capacity / Throughput Units for a Standard SKU namespace. Default capacity has a maximum of 2, but can be increased in blocks of 2 on a committed purchase basis.<br> * auto\_inflate\_enabled: Is Auto Inflate enabled for the Event Hub namespace?<br> * dedicated\_cluster\_id: Specifies the ID of the Event Hub Dedicated Cluster where this namespace should created.<br> * maximum\_throughput\_units: Specifies the maximum number of throughput units when Auto Inflate is Enabled. Valid values range from `1 - 20`.<br> * zone\_redundant:       Specifies if the Event Hub namespace should be Zone Redundant (created across Availability Zones). Changing this forces a new resource to be created.<br> * local\_authentication\_enabled: Is SAS authentication enabled for the EventHub Namespace?<br> * public\_network\_access\_enabled: Is public network access enabled for the EventHub Namespace? Defaults to `true`.<br> * minimum\_tls\_version:  The minimum supported TLS version for this EventHub Namespace. Valid values are: `1.0`, `1.1` and `1.2`. The current default minimum TLS version is `1.2`. | <pre>object({<br>    sku                           = string<br>    capacity                      = optional(number, 2)<br>    auto_inflate_enabled          = optional(bool, false)<br>    dedicated_cluster_id          = optional(string)<br>    maximum_throughput_units      = optional(number)<br>    zone_redundant                = optional(bool, true)<br>    local_authentication_enabled  = optional(bool)<br>    public_network_access_enabled = optional(bool, true)<br>    minimum_tls_version           = optional(string, "1.2")<br>  })</pre> | n/a | yes |
 | resource\_group\_name | Name of the resource group. | `string` | n/a | yes |
 | stack | Project stack name. | `string` | n/a | yes |
@@ -161,35 +162,20 @@ module "eventhub" {
 
 | Name | Description |
 |------|-------------|
-| consumer\_group\_id | Azure Event Hub Consumer Group ID |
-| consumer\_group\_name | Azure Event Hub Consumer Group name |
+| consumer\_groups | Azure Event Hub Consumer Groups |
 | environment | Application environment |
-| id | Azure Event Hub ID |
+| eventhubs | Azure Event Hubs outputs |
 | location | Azure region |
-| name | Azure Event Hub name |
 | namespace\_default\_authorization\_rule\_name | Event Hub namespace default authorization rule name |
 | namespace\_default\_primary\_connection\_string | Event Hub namespace default primary connection string |
 | namespace\_default\_primary\_key | Event Hub namespace default primary key |
 | namespace\_default\_secondary\_connection\_string | Eventhub namespace default secondary connection string |
 | namespace\_default\_secondary\_key | Event Hub namespace default secondary key |
 | namespace\_id | Azure Event Hub namespace id |
-| namespace\_listen\_authorization\_rule\_name | Event Hub namespace listen only authorization rule name |
-| namespace\_listen\_primary\_connection\_string | Event Hub namespace listen only primary connection string |
-| namespace\_listen\_primary\_key | Event Hub namespace listen only primary key |
-| namespace\_listen\_secondary\_connection\_string | Event Hub namespace listen only secondary connection string |
-| namespace\_listen\_secondary\_key | Event Hub namespace listen only secondary key |
-| namespace\_manage\_authorization\_rule\_name | Event Hub namespace manage only authorization rule name |
-| namespace\_manage\_primary\_connection\_string | Event Hub namespace manage only primary connection string |
-| namespace\_manage\_primary\_key | Event Hub namespace manage only primary key |
-| namespace\_manage\_secondary\_connection\_string | Event Hub namespace manage only secondary connection string |
-| namespace\_manage\_secondary\_key | Event Hub namespace manage only secondary key |
+| namespace\_listen\_authorization\_rule | Event Hub namespace listen only authorization rule |
 | namespace\_name | Azure Event Hub namespace name |
-| namespace\_send\_authorization\_rule\_name | Event Hub namespace send only authorization rule name |
-| namespace\_send\_primary\_connection\_string | Event Hub namespace send only primary connection string |
-| namespace\_send\_primary\_key | Eventhub namespace send only primary key |
-| namespace\_send\_secondary\_connection\_string | Event Hub namespace send only secondary connection string |
-| namespace\_send\_secondary\_key | Event Hub namespace send only secondary key |
-| partition\_ids | The identifiers for partitions created for Event Hubs. |
+| namespace\_send\_authorization\_manage | Event Hub namespace manage only authorization rule |
+| namespace\_send\_authorization\_rule | Event Hub namespace send only authorization rule |
 | resource\_group\_name | Azure Resource Group name |
 <!-- END_TF_DOCS -->
 ## Related documentation

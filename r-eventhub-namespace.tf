@@ -25,15 +25,15 @@ resource "azurerm_eventhub_namespace" "eventhub" {
   zone_redundant           = var.namespace_parameters.zone_redundant
 
   dynamic "network_rulesets" {
-    for_each = var.namespace_network_rules != null ? var.namespace_network_rules : {}
+    for_each = var.namespace_network_rules != null ? [var.namespace_network_rules] : []
     iterator = ntw
     content {
-      default_action                 = ntw.default_action
+      default_action                 = ntw.value.default_action
       public_network_access_enabled  = var.namespace_parameters.public_network_access_enabled
-      trusted_service_access_enabled = ntw.trusted_service_access_enabled
+      trusted_service_access_enabled = ntw.value.trusted_service_access_enabled
 
       dynamic "virtual_network_rule" {
-        for_each = ntw.virtual_network_rules
+        for_each = ntw.value.virtual_network_rules
         iterator = vnr
         content {
           subnet_id                                       = vnr.subnet_id
@@ -42,7 +42,7 @@ resource "azurerm_eventhub_namespace" "eventhub" {
       }
 
       dynamic "ip_rule" {
-        for_each = ntw.ip_rules
+        for_each = ntw.value.ip_rules
         iterator = ir
         content {
           ip_mask = ir.ip_mask

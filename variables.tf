@@ -68,9 +68,9 @@ EOD
 }
 
 variable "namespace_network_rules" {
-  description = "`network_rulesets` map block as defined below."
-  default     = {}
-  type = map(object({
+  description = "`network_rulesets` block as defined below."
+  default     = null
+  type = object({
     default_action                 = optional(string, "Deny")
     trusted_service_access_enabled = optional(bool, true)
     virtual_network_rules = optional(list(object({
@@ -81,7 +81,7 @@ variable "namespace_network_rules" {
       ip_mask = string
       action  = optional(string, "Allow")
     })), [])
-  }))
+  })
 }
 
 variable "namespace_authorizations" {
