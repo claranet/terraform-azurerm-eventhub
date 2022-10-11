@@ -39,12 +39,12 @@ variable "cluster_enabled" {
 
 variable "namespace_parameters" {
   description = <<EOD
-EventHub namespace parameters.
- * sku:                  Defines which tier to use. Valid options are Basic, Standard, and Premium. Please not that setting this field to Premium will force the creation of a new resource and also requires setting zone_redundant to true.
+EventHub Namespace parameters.
+ * sku:                  Defines which tier to use. Valid options are `Basic`, `Standard`, and `Premium`. Please not that setting this field to Premium will force the creation of a new resource and also requires setting zone_redundant to true.
  * capacity:             Specifies the Capacity / Throughput Units for a Standard SKU namespace. Default capacity has a maximum of 2, but can be increased in blocks of 2 on a committed purchase basis.
  * auto_inflate_enabled: Is Auto Inflate enabled for the Event Hub namespace?
  * dedicated_cluster_id: Specifies the ID of the Event Hub Dedicated Cluster where this namespace should created.
- * maximum_throughput_units: Specifies the maximum number of throughput units when Auto Inflate is Enabled. Valid values range from 1 - 20.
+ * maximum_throughput_units: Specifies the maximum number of throughput units when Auto Inflate is Enabled. Valid values range from `1 - 20`.
  * zone_redundant:       Specifies if the Event Hub namespace should be Zone Redundant (created across Availability Zones). Changing this forces a new resource to be created.
  * local_authentication_enabled: Is SAS authentication enabled for the EventHub Namespace?
  * public_network_access_enabled: Is public network access enabled for the EventHub Namespace? Defaults to `true`.
@@ -63,7 +63,7 @@ EOD
   })
   validation {
     condition     = contains(["Basic", "Standard", "Premium"], var.namespace_parameters.sku)
-    error_message = "Sku value is invalid. Must be `Basic`, `Standard` or `Premium`."
+    error_message = "SKU value is invalid. Must be `Basic`, `Standard` or `Premium`."
   }
 }
 
@@ -86,33 +86,27 @@ variable "namespace_network_rules" {
 
 # EventHubs
 
-variable "partition_count" {
-  description = "Specifies the current number of shards on the Event Hub."
-  type        = number
-}
-
-variable "message_retention" {
-  description = "Specifies the number of days to retain the events for this Event Hub."
-  type        = number
-  default     = 7
-}
-
-variable "capture_description" {
-  description = "Capture description for this Event Hub"
-  type = object({
-    enabled             = optional(bool)
-    encoding            = string
-    interval_in_seconds = optional(number)
-    size_limit_in_bytes = optional(number)
-    skip_empty_archives = optional(bool)
-    destination = object({
-      name                = optional(string)
-      archive_name_format = string
-      blob_container_name = string
-      storage_account_id  = string
-    })
-  })
-  default = null
+variable "hubs_parameters" {
+  description = "Map of Event Hub parameters objects (key is hub shortname)."
+  type = map(object({
+    custom_name       = optional(string)
+    partition_count   = number
+    message_retention = optional(number, 7)
+    capture_description = optional(object({
+      enabled             = optional(bool, true)
+      encoding            = string
+      interval_in_seconds = optional(number)
+      size_limit_in_bytes = optional(number)
+      skip_empty_archives = optional(bool)
+      destination = object({
+        name                = optional(string)
+        archive_name_format = optional(string, "EventHubArchive.AzureBlockBlob")
+        blob_container_name = string
+        storage_account_id  = string
+      })
+    }))
+  }))
+  default = {}
 }
 
 variable "consumer_group_user_metadata" {

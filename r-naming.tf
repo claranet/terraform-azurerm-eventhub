@@ -9,12 +9,12 @@ resource "azurecaf_name" "eventhub_namespace" {
 }
 
 resource "azurecaf_name" "eventhub" {
-  for_each = toset(local.hubs_list)
+  for_each = var.hubs_parameters
 
   name          = var.stack
   resource_type = "azurerm_eventhub"
   prefixes      = var.name_prefix == "" ? null : [local.name_prefix]
-  suffixes      = compact([var.client_name, var.location_short, var.environment, split("|", each.key)[1], local.name_suffix])
+  suffixes      = compact([var.client_name, var.location_short, var.environment, each.key, local.name_suffix])
   use_slug      = var.use_caf_naming
   clean_input   = true
   separator     = "-"

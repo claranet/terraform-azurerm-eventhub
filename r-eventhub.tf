@@ -1,25 +1,27 @@
 resource "azurerm_eventhub" "eventhub" {
-  name                = local.name
+  for_each = var.hubs_parameters
+
+  name                = coalesce(each.value.custom_name, azurecaf_name.eventhub[each.key].result)
   namespace_name      = azurerm_eventhub_namespace.eventhub.name
   resource_group_name = var.resource_group_name
 
-  message_retention = var.message_retention
-  partition_count   = var.partition_count
+  message_retention = each.value.message_retention
+  partition_count   = each.value.partition_count
 
   dynamic "capture_description" {
-    for_each = var.capture_description == null ? [] : [var.capture_description]
+    for_each = each.value.capture_description == null ? [] : ["enabled"]
     content {
-      enabled             = lookup(capture_description.value, "enabled", true)
-      encoding            = lookup(capture_description.value, "encoding")
-      interval_in_seconds = lookup(capture_description.value, "interval_in_seconds", null)
-      size_limit_in_bytes = lookup(capture_description.value, "size_limit_in_bytes", null)
-      skip_empty_archives = lookup(capture_description.value, "skip_empty_archives", null)
+      enabled             = each.value.capture_description.enabled
+      encoding            = each.value.capture_description.encoding
+      interval_in_seconds = each.value.capture_description.interval_in_seconds
+      size_limit_in_bytes = each.value.capture_description.size_limit_in_bytes
+      skip_empty_archives = each.value.capture_description.skip_empty_archives
 
       destination {
-        archive_name_format = lookup(capture_description.value.destination, "archive_name_format", "EventHubArchive.AzureBlockBlob")
-        blob_container_name = lookup(capture_description.value.destination, "blob_container_name")
-        name                = lookup(capture_description.value.destination, "name")
-        storage_account_id  = lookup(capture_description.value.destination, "storage_account_id")
+        archive_name_format = each.value.capture_description.destination.archive_name_format
+        blob_container_name = each.value.capture_description.destination.blob_container_name
+        name                = each.value.capture_description.destination.name
+        storage_account_id  = each.value.capture_description.destination.storage_account_id
       }
     }
   }
