@@ -2,7 +2,7 @@
 
 Breaking
   * AZ-840: Require Terraform 1.3+
-  * AZ-875: Rework module code
+  * AZ-875: Rework module code, minimum AzureRM version to `v3.23`
 
 Changed
   * AZ-596: Code lint and refactor

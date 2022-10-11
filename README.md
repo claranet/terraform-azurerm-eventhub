@@ -105,7 +105,7 @@ module "eventhub" {
 | Name | Version |
 |------|---------|
 | azurecaf | ~> 1.1 |
-| azurerm | ~> 3.22 |
+| azurerm | ~> 3.23 |
 
 ## Modules
 
