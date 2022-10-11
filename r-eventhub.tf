@@ -27,12 +27,13 @@ resource "azurerm_eventhub" "eventhub" {
   }
 }
 
+resource "azurerm_eventhub_consumer_group" "eventhub_consumer_group" {
+  for_each = { for h, cp in var.hubs_parameters : h => cp if cp.consumer_group.enabled }
 
-resource "azurerm_eventhub_consumer_group" "eventhub" {
-  eventhub_name       = azurerm_eventhub.eventhub.name
-  name                = local.name_consumer_group
+  eventhub_name       = azurerm_eventhub.eventhub[each.key].name
+  name                = coalesce(each.value.consumer_group.custom_name, azurecaf_name.consumer_group[each.key].result)
   namespace_name      = azurerm_eventhub_namespace.eventhub.name
   resource_group_name = var.resource_group_name
 
-  user_metadata = var.consumer_group_user_metadata
+  user_metadata = each.value.consumer_group.user_metadata
 }

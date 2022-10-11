@@ -117,17 +117,15 @@ module "eventhub" {
 
 | Name | Type |
 |------|------|
+| [azurecaf_name.consumer_group](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [azurecaf_name.eventhub](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
-| [azurecaf_name.eventhub_auth_rule_manage](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
-| [azurecaf_name.eventhub_auth_rule_reader](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
-| [azurecaf_name.eventhub_auth_rule_sender](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [azurecaf_name.eventhub_namespace](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [azurecaf_name.eventhub_namespace_auth_rule_manage](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [azurecaf_name.eventhub_namespace_auth_rule_reader](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [azurecaf_name.eventhub_namespace_auth_rule_sender](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [azurerm_eventhub.eventhub](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub) | resource |
 | [azurerm_eventhub_cluster.cluster](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_cluster) | resource |
-| [azurerm_eventhub_consumer_group.eventhub](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_consumer_group) | resource |
+| [azurerm_eventhub_consumer_group.eventhub_consumer_group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_consumer_group) | resource |
 | [azurerm_eventhub_namespace.eventhub](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_namespace) | resource |
 | [azurerm_eventhub_namespace_authorization_rule.listen](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_namespace_authorization_rule) | resource |
 | [azurerm_eventhub_namespace_authorization_rule.manage](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_namespace_authorization_rule) | resource |
@@ -139,13 +137,12 @@ module "eventhub" {
 |------|-------------|------|---------|:--------:|
 | client\_name | Client name/account used in naming. | `string` | n/a | yes |
 | cluster\_enabled | If `true`, an EventHub Cluster is created and associated to the Namespace. | `bool` | `false` | no |
-| consumer\_group\_user\_metadata | User metadata for Event Hub Consumer group | `string` | `null` | no |
 | custom\_diagnostic\_settings\_name | Custom name of the diagnostics settings, name will be 'default' if not set. | `string` | `"default"` | no |
 | custom\_namespace\_name | Custom resource name for EventHub namespace. | `string` | `""` | no |
 | default\_tags\_enabled | Option to enable or disable default tags | `bool` | `true` | no |
 | environment | Project environment. | `string` | n/a | yes |
 | extra\_tags | Extra tags to add | `map(string)` | `{}` | no |
-| hubs\_parameters | Map of Event Hub parameters objects (key is hub shortname). | <pre>map(object({<br>    custom_name       = optional(string)<br>    partition_count   = number<br>    message_retention = optional(number, 7)<br>    capture_description = optional(object({<br>      enabled             = optional(bool, true)<br>      encoding            = string<br>      interval_in_seconds = optional(number)<br>      size_limit_in_bytes = optional(number)<br>      skip_empty_archives = optional(bool)<br>      destination = object({<br>        name                = optional(string)<br>        archive_name_format = optional(string, "EventHubArchive.AzureBlockBlob")<br>        blob_container_name = string<br>        storage_account_id  = string<br>      })<br>    }))<br>  }))</pre> | `{}` | no |
+| hubs\_parameters | Map of Event Hub parameters objects (key is hub shortname). | <pre>map(object({<br>    custom_name       = optional(string)<br>    partition_count   = number<br>    message_retention = optional(number, 7)<br>    capture_description = optional(object({<br>      enabled             = optional(bool, true)<br>      encoding            = string<br>      interval_in_seconds = optional(number)<br>      size_limit_in_bytes = optional(number)<br>      skip_empty_archives = optional(bool)<br>      destination = object({<br>        name                = optional(string)<br>        archive_name_format = optional(string, "EventHubArchive.AzureBlockBlob")<br>        blob_container_name = string<br>        storage_account_id  = string<br>      })<br>    }))<br><br>    consumer_group = optional(object({<br>      enabled       = optional(bool, false)<br>      custom_name   = optional(string)<br>      user_metadata = optional(string)<br>    }), {})<br>  }))</pre> | `{}` | no |
 | location | Azure location for Eventhub. | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
 | logs\_categories | Log categories to send to destinations. | `list(string)` | `null` | no |

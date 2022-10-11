@@ -105,12 +105,12 @@ variable "hubs_parameters" {
         storage_account_id  = string
       })
     }))
+
+    consumer_group = optional(object({
+      enabled       = optional(bool, false)
+      custom_name   = optional(string)
+      user_metadata = optional(string)
+    }), {})
   }))
   default = {}
-}
-
-variable "consumer_group_user_metadata" {
-  description = "User metadata for Event Hub Consumer group"
-  type        = string
-  default     = null
 }
