@@ -1,32 +1,3 @@
-resource "azurerm_eventhub_namespace" "eventhub" {
-  name                = local.name_namespace
-  resource_group_name = var.resource_group_name
-  location            = module.region.location
-
-  sku                  = var.namespace_sku
-  capacity             = var.namespace_capacity
-  auto_inflate_enabled = var.namespace_auto_inflate_enabled
-  dedicated_cluster_id = var.namespace_dedicated_cluster_id
-
-  identity {
-    type = "SystemAssigned"
-  }
-
-  maximum_throughput_units = var.namespace_maximum_throughput_units
-  zone_redundant           = var.namespace_zone_redundant
-
-  network_rulesets = [
-    {
-      default_action                 = "Deny"
-      ip_rule                        = []
-      trusted_service_access_enabled = true
-      virtual_network_rule           = []
-    },
-  ]
-
-  tags = local.tags
-}
-
 resource "azurerm_eventhub" "eventhub" {
   name                = local.name
   namespace_name      = azurerm_eventhub_namespace.eventhub.name
