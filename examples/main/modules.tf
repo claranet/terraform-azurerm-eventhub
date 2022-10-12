@@ -39,32 +39,24 @@ module "eventhub" {
 
   resource_group_name = module.rg.resource_group_name
 
-  eventhub_namespaces_hubs = {
-    # You can just create a eventhub_namespace
-    eventhub0 = {}
+  cluster_enabled = true
 
-    # Or create a eventhub_namespace with some hubs with default values
-    eventhub1 = {
-      hubs = {
-        hub1 = {}
-        hub2 = {}
-      }
-    }
+  namespace_parameters = {
+    sku      = "Standard"
+    capacity = 2
+  }
 
-    eventhub2 = {
-      custom_name          = "testeventhub"
-      sku                  = "Standard"
-      capacity             = 1
-      auto_inflate_enabled = true
-      reader               = true
-      hubs = {
-        hubcentdeux = {
-          message_retention = 7
-          partition_count   = 2
-          sender            = true
-          manage            = true
-        }
-      }
+  namespace_network_rules = {
+    ip_rules = ["1.1.1.1"]
+    virtual_network_rule = [{
+      subnet_id = var.subnet_id
+    }]
+  }
+
+  hubs_parameters = {
+    main = {
+      custom_name     = "main-queue-hub"
+      partition_count = 2
     }
   }
 

@@ -45,8 +45,8 @@ resource "azurerm_eventhub_namespace" "eventhub" {
         for_each = ntw.value.ip_rules
         iterator = ir
         content {
-          ip_mask = ir.ip_mask
-          action  = ir.action
+          ip_mask = ir
+          action  = "Allow"
         }
       }
     }

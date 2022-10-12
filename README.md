@@ -64,32 +64,24 @@ module "eventhub" {
 
   resource_group_name = module.rg.resource_group_name
 
-  eventhub_namespaces_hubs = {
-    # You can just create a eventhub_namespace
-    eventhub0 = {}
+  cluster_enabled = true
 
-    # Or create a eventhub_namespace with some hubs with default values
-    eventhub1 = {
-      hubs = {
-        hub1 = {}
-        hub2 = {}
-      }
-    }
+  namespace_parameters = {
+    sku      = "Standard"
+    capacity = 2
+  }
 
-    eventhub2 = {
-      custom_name          = "testeventhub"
-      sku                  = "Standard"
-      capacity             = 1
-      auto_inflate_enabled = true
-      reader               = true
-      hubs = {
-        hubcentdeux = {
-          message_retention = 7
-          partition_count   = 2
-          sender            = true
-          manage            = true
-        }
-      }
+  namespace_network_rules = {
+    ip_rules = ["1.1.1.1"]
+    virtual_network_rule = [{
+      subnet_id = var.subnet_id
+    }]
+  }
+
+  hubs_parameters = {
+    main = {
+      custom_name     = "main-queue-hub"
+      partition_count = 2
     }
   }
 
@@ -152,8 +144,8 @@ module "eventhub" {
 | name\_prefix | Optional prefix for the generated name | `string` | `""` | no |
 | name\_suffix | Optional suffix for the generated name | `string` | `""` | no |
 | namespace\_authorizations | Object to specify which Namespace authorizations need to be created. | <pre>object({<br>    listen = optional(bool, true)<br>    send   = optional(bool, true)<br>    manage = optional(bool, true)<br>  })</pre> | `{}` | no |
-| namespace\_network\_rules | `network_rulesets` block as defined below. | <pre>object({<br>    default_action                 = optional(string, "Deny")<br>    trusted_service_access_enabled = optional(bool, true)<br>    virtual_network_rules = optional(list(object({<br>      subnet_id                                       = string<br>      ignore_missing_virtual_network_service_endpoint = optional(bool, false)<br>    })), [])<br>    ip_rules = optional(list(object({<br>      ip_mask = string<br>      action  = optional(string, "Allow")<br>    })), [])<br>  })</pre> | `null` | no |
-| namespace\_parameters | EventHub Namespace parameters.<br> * sku:                  Defines which tier to use. Valid options are `Basic`, `Standard`, and `Premium`. Please not that setting this field to Premium will force the creation of a new resource and also requires setting zone\_redundant to true.<br> * capacity:             Specifies the Capacity / Throughput Units for a Standard SKU namespace. Default capacity has a maximum of 2, but can be increased in blocks of 2 on a committed purchase basis.<br> * auto\_inflate\_enabled: Is Auto Inflate enabled for the Event Hub namespace?<br> * dedicated\_cluster\_id: Specifies the ID of the Event Hub Dedicated Cluster where this namespace should created.<br> * maximum\_throughput\_units: Specifies the maximum number of throughput units when Auto Inflate is Enabled. Valid values range from `1 - 20`.<br> * zone\_redundant:       Specifies if the Event Hub namespace should be Zone Redundant (created across Availability Zones). Changing this forces a new resource to be created.<br> * local\_authentication\_enabled: Is SAS authentication enabled for the EventHub Namespace?<br> * public\_network\_access\_enabled: Is public network access enabled for the EventHub Namespace? Defaults to `true`.<br> * minimum\_tls\_version:  The minimum supported TLS version for this EventHub Namespace. Valid values are: `1.0`, `1.1` and `1.2`. The current default minimum TLS version is `1.2`. | <pre>object({<br>    sku                           = string<br>    capacity                      = optional(number, 2)<br>    auto_inflate_enabled          = optional(bool, false)<br>    dedicated_cluster_id          = optional(string)<br>    maximum_throughput_units      = optional(number)<br>    zone_redundant                = optional(bool, true)<br>    local_authentication_enabled  = optional(bool)<br>    public_network_access_enabled = optional(bool, true)<br>    minimum_tls_version           = optional(string, "1.2")<br>  })</pre> | n/a | yes |
+| namespace\_network\_rules | `network_rulesets` block as defined below. | <pre>object({<br>    default_action                 = optional(string, "Deny")<br>    trusted_service_access_enabled = optional(bool, true)<br>    virtual_network_rules = optional(list(object({<br>      subnet_id                                       = string<br>      ignore_missing_virtual_network_service_endpoint = optional(bool, false)<br>    })), [])<br>    ip_rules = optional(list(string), [])<br>  })</pre> | `null` | no |
+| namespace\_parameters | EventHub Namespace parameters:<pre>- sku:                  Defines which tier to use. Valid options are `Basic`, `Standard`, and `Premium`. Please not that setting this field to Premium will force the creation of a new resource and also requires setting zone_redundant to true.<br>- capacity:             Specifies the Capacity / Throughput Units for a Standard SKU namespace. Default capacity has a maximum of 2, but can be increased in blocks of 2 on a committed purchase basis.<br>- auto_inflate_enabled: Is Auto Inflate enabled for the Event Hub namespace?<br>- dedicated_cluster_id: Specifies the ID of the Event Hub Dedicated Cluster where this namespace should created.<br>- maximum_throughput_units: Specifies the maximum number of throughput units when Auto Inflate is Enabled. Valid values range from `1 - 20`.<br>- zone_redundant:       Specifies if the Event Hub namespace should be Zone Redundant (created across Availability Zones). Changing this forces a new resource to be created.<br>- local_authentication_enabled: Is SAS authentication enabled for the EventHub Namespace?<br>- public_network_access_enabled: Is public network access enabled for the EventHub Namespace? Defaults to `true`.<br>- minimum_tls_version:  The minimum supported TLS version for this EventHub Namespace. Valid values are: `1.0`, `1.1` and `1.2`. The current default minimum TLS version is `1.2`.</pre> | <pre>object({<br>    sku                           = string<br>    capacity                      = optional(number, 2)<br>    auto_inflate_enabled          = optional(bool, false)<br>    dedicated_cluster_id          = optional(string)<br>    maximum_throughput_units      = optional(number)<br>    zone_redundant                = optional(bool, true)<br>    local_authentication_enabled  = optional(bool)<br>    public_network_access_enabled = optional(bool, true)<br>    minimum_tls_version           = optional(string, "1.2")<br>  })</pre> | n/a | yes |
 | resource\_group\_name | Name of the resource group. | `string` | n/a | yes |
 | stack | Project stack name. | `string` | n/a | yes |
 | use\_caf\_naming | Use the Azure CAF naming provider to generate default resource name. `custom_namespace_name` override this if set. Legacy default name is used if this is set to `false`. | `bool` | `true` | no |

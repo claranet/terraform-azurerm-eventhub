@@ -17,3 +17,8 @@ variable "stack" {
   description = "Project stack name"
   type        = string
 }
+
+variable "subnet_id" {
+  description = "EventHub subnet"
+  type        = string
+}
