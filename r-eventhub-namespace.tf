@@ -5,6 +5,8 @@ resource "azurerm_eventhub_cluster" "cluster" {
   resource_group_name = var.resource_group_name
   location            = var.location
   sku_name            = "Dedicated_1"
+
+  tags = local.tags
 }
 
 resource "azurerm_eventhub_namespace" "eventhub" {
@@ -26,6 +28,7 @@ resource "azurerm_eventhub_namespace" "eventhub" {
 
   dynamic "network_rulesets" {
     for_each = var.network_rules_enabled ? ["enabled"] : []
+
     content {
       default_action                 = var.network_rules_default_action
       public_network_access_enabled  = var.namespace_parameters.public_network_access_enabled

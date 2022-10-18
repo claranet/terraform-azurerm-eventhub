@@ -28,8 +28,8 @@ resource "azurerm_eventhub" "eventhub" {
 
   lifecycle {
     precondition {
-      condition     = var.namespace_parameters.sku == "Basic" && each.value.capture_description != null
-      error_message = "`capture_description` bloc cannot be set with `Basic` Namespace SKU."
+      condition     = var.namespace_parameters.sku != "Basic" || (var.namespace_parameters.sku == "Basic" && each.value.capture_description != null)
+      error_message = "`capture_description` block cannot be set with `Basic` Namespace SKU."
     }
   }
 }
