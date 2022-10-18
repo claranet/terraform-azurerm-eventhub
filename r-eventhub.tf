@@ -25,6 +25,13 @@ resource "azurerm_eventhub" "eventhub" {
       }
     }
   }
+
+  lifecycle {
+    precondition {
+      condition     = var.namespace_parameters.sku == "Basic" && each.value.capture_description != null
+      error_message = "`capture_description` bloc cannot be set with `Basic` Namespace SKU."
+    }
+  }
 }
 
 resource "azurerm_eventhub_consumer_group" "eventhub_consumer_group" {
