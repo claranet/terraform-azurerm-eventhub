@@ -84,7 +84,7 @@ variable "namespace_authorizations" {
 variable "network_rules_enabled" {
   description = "Boolean to enable Network Rules on the EventHub Namespace, requires `allowed_cidrs`, `allowed_subnet_ids`, `network_rules_default_action` or `network_trusted_service_access_enabled` correctly set if enabled."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "network_rules_default_action" {

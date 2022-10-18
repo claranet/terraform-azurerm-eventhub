@@ -27,7 +27,8 @@ resource "azurerm_eventhub_namespace" "eventhub" {
   zone_redundant           = var.namespace_parameters.zone_redundant
 
   dynamic "network_rulesets" {
-    for_each = var.network_rules_enabled ? ["enabled"] : []
+    for_each = var.network_rules_enabled ? [local.networks_rules] : []
+    iterator = rules
 
     content {
       default_action                 = var.network_rules_default_action
@@ -35,19 +36,17 @@ resource "azurerm_eventhub_namespace" "eventhub" {
       trusted_service_access_enabled = var.network_trusted_service_access_enabled
 
       dynamic "virtual_network_rule" {
-        for_each = var.allowed_subnet_ids
-        iterator = vnr
+        for_each = rules.value.subnet_ids
         content {
-          subnet_id                                       = vnr.value
+          subnet_id                                       = virtual_network_rule.value
           ignore_missing_virtual_network_service_endpoint = false
         }
       }
 
       dynamic "ip_rule" {
-        for_each = var.allowed_cidrs
-        iterator = ir
+        for_each = rules.value.cidrs
         content {
-          ip_mask = ir.value
+          ip_mask = ip_rule.value
           action  = "Allow"
         }
       }
