@@ -46,12 +46,10 @@ module "eventhub" {
     capacity = 2
   }
 
-  namespace_network_rules = {
-    ip_rules = ["1.1.1.1"]
-    virtual_network_rule = [{
-      subnet_id = var.subnet_id
-    }]
-  }
+  allowed_cidrs = ["1.1.1.1/32"]
+  allowed_subnet_ids = [
+    var.subnet_id
+  ]
 
   hubs_parameters = {
     main = {

@@ -69,20 +69,6 @@ EOD
   }
 }
 
-variable "namespace_network_rules" {
-  description = "`network_rulesets` block as defined below."
-  default     = null
-  type = object({
-    default_action                 = optional(string, "Deny")
-    trusted_service_access_enabled = optional(bool, true)
-    virtual_network_rules = optional(list(object({
-      subnet_id                                       = string
-      ignore_missing_virtual_network_service_endpoint = optional(bool, false)
-    })), [])
-    ip_rules = optional(list(string), [])
-  })
-}
-
 variable "namespace_authorizations" {
   description = "Object to specify which Namespace authorizations need to be created."
   type = object({
@@ -91,6 +77,38 @@ variable "namespace_authorizations" {
     manage = optional(bool, true)
   })
   default = {}
+}
+
+# EventHub Namespace Network rules
+
+variable "network_rules_enabled" {
+  description = "Boolean to enable Network Rules on the EventHub Namespace, requires `allowed_cidrs`, `allowed_subnet_ids`, `network_rules_default_action` or `network_trusted_service_access_enabled` correctly set if enabled."
+  type        = bool
+  default     = true
+}
+
+variable "network_rules_default_action" {
+  description = "The default action to take when a rule is not matched. Possible values are `Allow` and `Deny`."
+  type        = string
+  default     = "Deny"
+}
+
+variable "network_trusted_service_access_enabled" {
+  description = "Whether Trusted Microsoft Services are allowed to bypass firewall."
+  type        = bool
+  default     = true
+}
+
+variable "allowed_cidrs" {
+  description = "List of CIDR to allow access to that EventHub Namespace."
+  type        = list(string)
+  default     = []
+}
+
+variable "allowed_subnet_ids" {
+  description = "Subnets to allow access to that EventHub Namespace."
+  type        = list(string)
+  default     = []
 }
 
 # EventHubs
