@@ -31,7 +31,7 @@ variable "location_short" {
 }
 
 # EventHub Namespace & Cluster
-variable "cluster_enabled" {
+variable "create_dedicated_cluster" {
   description = "If `true`, an EventHub Cluster is created and associated to the Namespace."
   type        = bool
   default     = false

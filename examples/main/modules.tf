@@ -39,7 +39,7 @@ module "eventhub" {
 
   resource_group_name = module.rg.resource_group_name
 
-  cluster_enabled = true
+  create_dedicated_cluster = true
 
   namespace_parameters = {
     sku      = "Standard"

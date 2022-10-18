@@ -64,7 +64,7 @@ module "eventhub" {
 
   resource_group_name = module.rg.resource_group_name
 
-  cluster_enabled = true
+  create_dedicated_cluster = true
 
   namespace_parameters = {
     sku      = "Standard"
@@ -128,7 +128,7 @@ module "eventhub" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | client\_name | Client name/account used in naming. | `string` | n/a | yes |
-| cluster\_enabled | If `true`, an EventHub Cluster is created and associated to the Namespace. | `bool` | `false` | no |
+| create\_dedicated\_cluster | If `true`, an EventHub Cluster is created and associated to the Namespace. | `bool` | `false` | no |
 | custom\_diagnostic\_settings\_name | Custom name of the diagnostics settings, name will be 'default' if not set. | `string` | `"default"` | no |
 | custom\_namespace\_name | Custom resource name for EventHub namespace. | `string` | `""` | no |
 | default\_tags\_enabled | Option to enable or disable default tags | `bool` | `true` | no |
