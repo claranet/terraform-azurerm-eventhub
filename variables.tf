@@ -53,7 +53,7 @@ EventHub Namespace parameters:
 ```
 EOD
   type = object({
-    sku                           = string
+    sku                           = optional(string, "Standard")
     capacity                      = optional(number, 2)
     auto_inflate_enabled          = optional(bool, false)
     dedicated_cluster_id          = optional(string)
