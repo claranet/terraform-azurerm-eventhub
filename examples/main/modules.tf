@@ -46,7 +46,8 @@ module "eventhub" {
     capacity = 2
   }
 
-  allowed_cidrs = ["1.1.1.1/32"]
+  network_rules_enabled = true
+  allowed_cidrs         = ["1.1.1.1/32"]
   allowed_subnet_ids = [
     var.subnet_id
   ]
