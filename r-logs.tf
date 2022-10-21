@@ -2,9 +2,7 @@ module "diagnostics" {
   source  = "claranet/diagnostic-settings/azurerm"
   version = "6.0.0"
 
-  for_each = var.eventhub_namespaces_hubs
-
-  resource_id = azurerm_eventhub_namespace.eventhub_namespace[each.key].id
+  resource_id = azurerm_eventhub_namespace.eventhub.id
 
   logs_destinations_ids = var.logs_destinations_ids
   log_categories        = var.logs_categories
