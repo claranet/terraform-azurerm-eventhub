@@ -138,6 +138,12 @@ variable "hubs_parameters" {
       custom_name   = optional(string)
       user_metadata = optional(string)
     }), {})
+
+    authorizations = optional(object({
+      listen = optional(bool, true)
+      send   = optional(bool, true)
+      manage = optional(bool, true)
+    }), {})
   }))
   default = {}
 }

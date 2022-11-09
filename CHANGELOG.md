@@ -5,6 +5,7 @@ Fixed
 
 Added
   * AZ-909: Add custom name for EventHub namespace authorization rules
+  * AZ-875: Add authorization rules for Hubs
 
 # v7.0.1 - 2022-11-10
 

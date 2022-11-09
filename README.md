@@ -71,6 +71,11 @@ module "eventhub" {
     capacity = 2
   }
 
+  namespace_authorizations = {
+    listen = true
+    send   = false
+  }
+
   network_rules_enabled = true
   allowed_cidrs         = ["1.1.1.1/32"]
   allowed_subnet_ids = [
@@ -81,6 +86,12 @@ module "eventhub" {
     main = {
       custom_name     = "main-queue-hub"
       partition_count = 2
+
+      authorizations = {
+        listen = true
+        send   = true
+        manage = false
+      }
     }
   }
 
@@ -110,9 +121,13 @@ module "eventhub" {
 |------|------|
 | [azurecaf_name.consumer_group](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [azurecaf_name.eventhub](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
+| [azurecaf_name.eventhub_auth_rule](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [azurecaf_name.eventhub_namespace](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [azurecaf_name.eventhub_namespace_auth_rule](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [azurerm_eventhub.eventhub](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub) | resource |
+| [azurerm_eventhub_authorization_rule.listen](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_authorization_rule) | resource |
+| [azurerm_eventhub_authorization_rule.manage](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_authorization_rule) | resource |
+| [azurerm_eventhub_authorization_rule.send](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_authorization_rule) | resource |
 | [azurerm_eventhub_cluster.cluster](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_cluster) | resource |
 | [azurerm_eventhub_consumer_group.eventhub_consumer_group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_consumer_group) | resource |
 | [azurerm_eventhub_namespace.eventhub](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_namespace) | resource |
@@ -134,7 +149,7 @@ module "eventhub" {
 | default\_tags\_enabled | Option to enable or disable default tags | `bool` | `true` | no |
 | environment | Project environment. | `string` | n/a | yes |
 | extra\_tags | Extra tags to add | `map(string)` | `{}` | no |
-| hubs\_parameters | Map of Event Hub parameters objects (key is hub shortname). | <pre>map(object({<br>    custom_name       = optional(string)<br>    partition_count   = number<br>    message_retention = optional(number, 7)<br>    capture_description = optional(object({<br>      enabled             = optional(bool, true)<br>      encoding            = string<br>      interval_in_seconds = optional(number)<br>      size_limit_in_bytes = optional(number)<br>      skip_empty_archives = optional(bool)<br>      destination = object({<br>        name                = optional(string, "EventHubArchive.AzureBlockBlob")<br>        archive_name_format = optional(string)<br>        blob_container_name = string<br>        storage_account_id  = string<br>      })<br>    }))<br><br>    consumer_group = optional(object({<br>      enabled       = optional(bool, false)<br>      custom_name   = optional(string)<br>      user_metadata = optional(string)<br>    }), {})<br>  }))</pre> | `{}` | no |
+| hubs\_parameters | Map of Event Hub parameters objects (key is hub shortname). | <pre>map(object({<br>    custom_name       = optional(string)<br>    partition_count   = number<br>    message_retention = optional(number, 7)<br>    capture_description = optional(object({<br>      enabled             = optional(bool, true)<br>      encoding            = string<br>      interval_in_seconds = optional(number)<br>      size_limit_in_bytes = optional(number)<br>      skip_empty_archives = optional(bool)<br>      destination = object({<br>        name                = optional(string, "EventHubArchive.AzureBlockBlob")<br>        archive_name_format = optional(string)<br>        blob_container_name = string<br>        storage_account_id  = string<br>      })<br>    }))<br><br>    consumer_group = optional(object({<br>      enabled       = optional(bool, false)<br>      custom_name   = optional(string)<br>      user_metadata = optional(string)<br>    }), {})<br><br>    authorizations = optional(object({<br>      listen = optional(bool, true)<br>      send   = optional(bool, true)<br>      manage = optional(bool, true)<br>    }), {})<br>  }))</pre> | `{}` | no |
 | location | Azure location for Eventhub. | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
 | logs\_categories | Log categories to send to destinations. | `list(string)` | `null` | no |
@@ -159,6 +174,9 @@ module "eventhub" {
 | consumer\_groups | Azure Event Hub Consumer Groups |
 | environment | Application environment |
 | eventhubs | Azure Event Hubs outputs |
+| hubs\_listen\_authorization\_rule | Event Hubs listen only authorization rules |
+| hubs\_manage\_authorization\_rule | Event Hubs namespace manage authorization rules |
+| hubs\_send\_authorization\_rule | Event Hubs send only authorization rules |
 | location | Azure region |
 | namespace\_default\_authorization\_rule\_name | Event Hub namespace default authorization rule name |
 | namespace\_default\_primary\_connection\_string | Event Hub namespace default primary connection string |
@@ -167,7 +185,7 @@ module "eventhub" {
 | namespace\_default\_secondary\_key | Event Hub namespace default secondary key |
 | namespace\_id | Azure Event Hub namespace id |
 | namespace\_listen\_authorization\_rule | Event Hub namespace listen only authorization rule |
-| namespace\_manage\_authorization\_rule | Event Hub namespace manage only authorization rule |
+| namespace\_manage\_authorization\_rule | Event Hub namespace manage authorization rule |
 | namespace\_name | Azure Event Hub namespace name |
 | namespace\_send\_authorization\_rule | Event Hub namespace send only authorization rule |
 | resource\_group\_name | Azure Resource Group name |

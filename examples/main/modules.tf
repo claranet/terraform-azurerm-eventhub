@@ -46,6 +46,11 @@ module "eventhub" {
     capacity = 2
   }
 
+  namespace_authorizations = {
+    listen = true
+    send   = false
+  }
+
   network_rules_enabled = true
   allowed_cidrs         = ["1.1.1.1/32"]
   allowed_subnet_ids = [
@@ -56,6 +61,12 @@ module "eventhub" {
     main = {
       custom_name     = "main-queue-hub"
       partition_count = 2
+
+      authorizations = {
+        listen = true
+        send   = true
+        manage = false
+      }
     }
   }
 
