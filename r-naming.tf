@@ -21,7 +21,7 @@ resource "azurecaf_name" "eventhub" {
 }
 
 resource "azurecaf_name" "consumer_group" {
-  for_each = var.hubs_parameters
+  for_each = try(var.hubs_parameters, {})
 
   name          = var.stack
   resource_type = "azurerm_eventhub_consumer_group"
