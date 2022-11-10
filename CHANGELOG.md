@@ -1,3 +1,8 @@
+# Unreleased
+
+Fixed
+  * AZ-875: Fix typo, code cleanup
+
 # v7.0.0 - 2022-10-21
 
 Breaking

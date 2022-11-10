@@ -111,9 +111,7 @@ module "eventhub" {
 | [azurecaf_name.consumer_group](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [azurecaf_name.eventhub](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [azurecaf_name.eventhub_namespace](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
-| [azurecaf_name.eventhub_namespace_auth_rule_listen](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
-| [azurecaf_name.eventhub_namespace_auth_rule_manage](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
-| [azurecaf_name.eventhub_namespace_auth_rule_send](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
+| [azurecaf_name.eventhub_namespace_auth_rule](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [azurerm_eventhub.eventhub](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub) | resource |
 | [azurerm_eventhub_cluster.cluster](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_cluster) | resource |
 | [azurerm_eventhub_consumer_group.eventhub_consumer_group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_consumer_group) | resource |
@@ -168,8 +166,8 @@ module "eventhub" {
 | namespace\_default\_secondary\_key | Event Hub namespace default secondary key |
 | namespace\_id | Azure Event Hub namespace id |
 | namespace\_listen\_authorization\_rule | Event Hub namespace listen only authorization rule |
+| namespace\_manage\_authorization\_rule | Event Hub namespace manage only authorization rule |
 | namespace\_name | Azure Event Hub namespace name |
-| namespace\_send\_authorization\_manage | Event Hub namespace manage only authorization rule |
 | namespace\_send\_authorization\_rule | Event Hub namespace send only authorization rule |
 | resource\_group\_name | Azure Resource Group name |
 <!-- END_TF_DOCS -->

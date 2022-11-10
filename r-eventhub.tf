@@ -1,5 +1,5 @@
 resource "azurerm_eventhub" "eventhub" {
-  for_each = var.hubs_parameters
+  for_each = try(var.hubs_parameters, {})
 
   name                = coalesce(each.value.custom_name, azurecaf_name.eventhub[each.key].result)
   namespace_name      = azurerm_eventhub_namespace.eventhub.name

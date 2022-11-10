@@ -63,7 +63,7 @@ output "namespace_send_authorization_rule" {
   value       = try(azurerm_eventhub_namespace_authorization_rule.send["enabled"], null)
 }
 
-output "namespace_send_authorization_manage" {
+output "namespace_manage_authorization_rule" {
   description = "Event Hub namespace manage only authorization rule"
   value       = try(azurerm_eventhub_namespace_authorization_rule.manage["enabled"], null)
 }
