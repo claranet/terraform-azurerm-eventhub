@@ -10,6 +10,7 @@ locals {
         hub_name       = hub_name
         hub            = hub
         rule           = rule
+        custom_name    = hub.custom_name
         authorizations = hub.authorizations
       }
     ]
