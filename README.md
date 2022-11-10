@@ -171,24 +171,24 @@ module "eventhub" {
 
 | Name | Description |
 |------|-------------|
-| consumer\_groups | Azure Event Hub Consumer Groups |
-| environment | Application environment |
-| eventhubs | Azure Event Hubs outputs |
-| hubs\_listen\_authorization\_rule | Event Hubs listen only authorization rules |
-| hubs\_manage\_authorization\_rule | Event Hubs namespace manage authorization rules |
-| hubs\_send\_authorization\_rule | Event Hubs send only authorization rules |
-| location | Azure region |
-| namespace\_default\_authorization\_rule\_name | Event Hub namespace default authorization rule name |
-| namespace\_default\_primary\_connection\_string | Event Hub namespace default primary connection string |
-| namespace\_default\_primary\_key | Event Hub namespace default primary key |
-| namespace\_default\_secondary\_connection\_string | Eventhub namespace default secondary connection string |
-| namespace\_default\_secondary\_key | Event Hub namespace default secondary key |
-| namespace\_id | Azure Event Hub namespace id |
-| namespace\_listen\_authorization\_rule | Event Hub namespace listen only authorization rule |
-| namespace\_manage\_authorization\_rule | Event Hub namespace manage authorization rule |
-| namespace\_name | Azure Event Hub namespace name |
-| namespace\_send\_authorization\_rule | Event Hub namespace send only authorization rule |
-| resource\_group\_name | Azure Resource Group name |
+| consumer\_groups | Azure Event Hub Consumer Groups. |
+| environment | Application environment. |
+| eventhubs | Azure Event Hubs outputs. |
+| hubs\_listen\_authorization\_rule | Event Hubs listen only authorization rules. |
+| hubs\_manage\_authorization\_rule | Event Hubs Namespace manage authorization rules. |
+| hubs\_send\_authorization\_rule | Event Hubs send only authorization rules. |
+| location | Azure region. |
+| namespace\_default\_authorization\_rule\_name | Event Hub Namespace default authorization rule name. |
+| namespace\_default\_primary\_connection\_string | Event Hub Namespace default primary connection string. |
+| namespace\_default\_primary\_key | Event Hub Namespace default primary key. |
+| namespace\_default\_secondary\_connection\_string | Eventhub Namespace default secondary connection string. |
+| namespace\_default\_secondary\_key | Event Hub Namespace default secondary key. |
+| namespace\_id | Azure Event Hub Namespace ID. |
+| namespace\_listen\_authorization\_rule | Event Hub Namespace listen only authorization rule. |
+| namespace\_manage\_authorization\_rule | Event Hub Namespace manage authorization rule. |
+| namespace\_name | Azure Event Hub Namespace name. |
+| namespace\_send\_authorization\_rule | Event Hub Namespace send only authorization rule. |
+| resource\_group\_name | Azure Resource Group name. |
 <!-- END_TF_DOCS -->
 ## Related documentation
 
