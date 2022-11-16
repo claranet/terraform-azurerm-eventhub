@@ -126,8 +126,8 @@ variable "hubs_parameters" {
       size_limit_in_bytes = optional(number)
       skip_empty_archives = optional(bool)
       destination = object({
-        name                = optional(string)
-        archive_name_format = optional(string, "EventHubArchive.AzureBlockBlob")
+        name                = optional(string, "EventHubArchive.AzureBlockBlob")
+        archive_name_format = optional(string)
         blob_container_name = string
         storage_account_id  = string
       })
