@@ -24,20 +24,8 @@ variable "custom_namespace_name" {
   default     = ""
 }
 
-variable "custom_namespace_listen_auth_rule_name" {
-  description = "Custom listen authorization rule name for EventHub namespace."
+variable "custom_namespace_auth_rule_name" {
+  description = "Custom authorization rule name for EventHub namespace."
   type        = string
-  default     = ""
-}
-
-variable "custom_namespace_manage_auth_rule_name" {
-  description = "Custom manage authorization rule name for EventHub namespace."
-  type        = string
-  default     = ""
-}
-
-variable "custom_namespace_send_auth_rule_name" {
-  description = "Custom send authorization rule name for EventHub namespace."
-  type        = string
-  default     = ""
+  default     = null
 }

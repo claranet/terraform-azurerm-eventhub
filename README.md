@@ -129,10 +129,8 @@ module "eventhub" {
 | client\_name | Client name/account used in naming. | `string` | n/a | yes |
 | create\_dedicated\_cluster | If `true`, an EventHub Cluster is created and associated to the Namespace. | `bool` | `false` | no |
 | custom\_diagnostic\_settings\_name | Custom name of the diagnostics settings, name will be 'default' if not set. | `string` | `"default"` | no |
-| custom\_namespace\_listen\_auth\_rule\_name | Custom listen authorization rule name for EventHub namespace. | `string` | `""` | no |
-| custom\_namespace\_manage\_auth\_rule\_name | Custom manage authorization rule name for EventHub namespace. | `string` | `""` | no |
+| custom\_namespace\_auth\_rule\_name | Custom authorization rule name for EventHub namespace. | `string` | `null` | no |
 | custom\_namespace\_name | Custom resource name for EventHub namespace. | `string` | `""` | no |
-| custom\_namespace\_send\_auth\_rule\_name | Custom send authorization rule name for EventHub namespace. | `string` | `""` | no |
 | default\_tags\_enabled | Option to enable or disable default tags | `bool` | `true` | no |
 | environment | Project environment. | `string` | n/a | yes |
 | extra\_tags | Extra tags to add | `map(string)` | `{}` | no |
