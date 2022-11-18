@@ -1,4 +1,4 @@
-# Unreleased
+# v7.1.0 - 2022-11-18
 
 Fixed
   * AZ-909: Fix default values of `archive_name_format`and `name` in `hub_parameters` block
