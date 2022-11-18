@@ -23,3 +23,9 @@ variable "custom_namespace_name" {
   type        = string
   default     = ""
 }
+
+variable "custom_namespace_auth_rule_name" {
+  description = "Custom authorization rule name for EventHub namespace."
+  type        = string
+  default     = null
+}

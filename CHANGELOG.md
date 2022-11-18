@@ -1,3 +1,11 @@
+# Unreleased
+
+Fixed
+  * AZ-909: Fix default values of `archive_name_format`and `name` in `hub_parameters` block
+
+Added
+  * AZ-909: Add custom name for EventHub namespace authorization rules
+
 # v7.0.1 - 2022-11-10
 
 Fixed
