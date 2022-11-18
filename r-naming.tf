@@ -1,4 +1,4 @@
-resource "azurecaf_name" "eventhub_namespace" {
+data "azurecaf_name" "eventhub_namespace" {
   name          = var.stack
   resource_type = "azurerm_eventhub_namespace"
   prefixes      = var.name_prefix == "" ? null : [local.name_prefix]
@@ -8,7 +8,7 @@ resource "azurecaf_name" "eventhub_namespace" {
   separator     = "-"
 }
 
-resource "azurecaf_name" "eventhub" {
+data "azurecaf_name" "eventhub" {
   for_each = var.hubs_parameters
 
   name          = var.stack
@@ -20,7 +20,7 @@ resource "azurecaf_name" "eventhub" {
   separator     = "-"
 }
 
-resource "azurecaf_name" "consumer_group" {
+data "azurecaf_name" "consumer_group" {
   for_each = try(var.hubs_parameters, {})
 
   name          = var.stack
@@ -32,7 +32,7 @@ resource "azurecaf_name" "consumer_group" {
   separator     = "-"
 }
 
-resource "azurecaf_name" "eventhub_namespace_auth_rule" {
+data "azurecaf_name" "eventhub_namespace_auth_rule" {
   for_each = toset(["listen", "send", "manage"])
 
   name          = var.stack
@@ -44,7 +44,7 @@ resource "azurecaf_name" "eventhub_namespace_auth_rule" {
   separator     = "-"
 }
 
-resource "azurecaf_name" "eventhub_auth_rule" {
+data "azurecaf_name" "eventhub_auth_rule" {
   for_each = { for a in local.hubs_auth_rules : format("%s.%s", a.hub_name, a.rule) => format("%s-%s", a.hub_name, a.rule) }
 
   name          = var.stack
