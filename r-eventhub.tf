@@ -1,7 +1,7 @@
 resource "azurerm_eventhub" "eventhub" {
   for_each = try(var.hubs_parameters, {})
 
-  name                = coalesce(each.value.custom_name, azurecaf_name.eventhub[each.key].result)
+  name                = coalesce(each.value.custom_name, data.azurecaf_name.eventhub[each.key].result)
   namespace_name      = azurerm_eventhub_namespace.eventhub.name
   resource_group_name = var.resource_group_name
 
@@ -38,7 +38,7 @@ resource "azurerm_eventhub_consumer_group" "eventhub_consumer_group" {
   for_each = { for h, cp in var.hubs_parameters : h => cp if cp.consumer_group.enabled }
 
   eventhub_name       = azurerm_eventhub.eventhub[each.key].name
-  name                = coalesce(each.value.consumer_group.custom_name, azurecaf_name.consumer_group[each.key].result)
+  name                = coalesce(each.value.consumer_group.custom_name, data.azurecaf_name.consumer_group[each.key].result)
   namespace_name      = azurerm_eventhub_namespace.eventhub.name
   resource_group_name = var.resource_group_name
 
