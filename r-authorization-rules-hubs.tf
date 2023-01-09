@@ -14,7 +14,7 @@ resource "azurerm_eventhub_authorization_rule" "listen" {
 resource "azurerm_eventhub_authorization_rule" "send" {
   for_each = { for a in local.hubs_auth_rules : a.hub_name => a if a.rule == "send" && a.authorizations.send }
 
-  name                = try(format("%s-listen", each.value.custom_name), var.use_caf_naming ? data.azurecaf_name.eventhub_auth_rule[format("%s.send", each.value.hub_name)].result : "send-default")
+  name                = try(format("%s-send", each.value.custom_name), var.use_caf_naming ? data.azurecaf_name.eventhub_auth_rule[format("%s.send", each.value.hub_name)].result : "send-default")
   namespace_name      = azurerm_eventhub_namespace.eventhub.name
   eventhub_name       = azurerm_eventhub.eventhub[each.value.hub_name].name
   resource_group_name = var.resource_group_name
@@ -27,7 +27,7 @@ resource "azurerm_eventhub_authorization_rule" "send" {
 resource "azurerm_eventhub_authorization_rule" "manage" {
   for_each = { for a in local.hubs_auth_rules : a.hub_name => a if a.rule == "manage" && a.authorizations.manage }
 
-  name                = try(format("%s-listen", each.value.custom_name), var.use_caf_naming ? data.azurecaf_name.eventhub_auth_rule[format("%s.manage", each.value.hub_name)].result : "manage-default")
+  name                = try(format("%s-manage", each.value.custom_name), var.use_caf_naming ? data.azurecaf_name.eventhub_auth_rule[format("%s.manage", each.value.hub_name)].result : "manage-default")
   namespace_name      = azurerm_eventhub_namespace.eventhub.name
   eventhub_name       = azurerm_eventhub.eventhub[each.value.hub_name].name
   resource_group_name = var.resource_group_name
