@@ -1,4 +1,4 @@
-# Unreleased
+# v7.2.1 - 2023-01-13
 
 Fixed
   * AZ-974: Fix EventHub authorization rules custom names 
