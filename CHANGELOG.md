@@ -1,3 +1,8 @@
+# Unreleased
+
+Fixed
+  * AZ-1006: Fix `capture_description` preconditon
+
 # v7.2.1 - 2023-01-13
 
 Fixed
