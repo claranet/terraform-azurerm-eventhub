@@ -1,3 +1,8 @@
+# Unreleased
+
+Breaking
+  * AZ-1153: Remove `retention_days` parameters, it must be handled at destination level now. (for reference: [Provider issue](https://github.com/hashicorp/terraform-provider-azurerm/issues/23051))
+
 # v7.2.2 - 2023-02-17
 
 Fixed
@@ -6,7 +11,7 @@ Fixed
 # v7.2.1 - 2023-01-13
 
 Fixed
-  * AZ-974: Fix EventHub authorization rules custom names 
+  * AZ-974: Fix EventHub authorization rules custom names
 
 # v7.2.0 - 2022-11-23
 
