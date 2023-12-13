@@ -1,3 +1,7 @@
+# Unreleased
+
+ * issue #1: Add `sensitive = true` argument to outputs of authorization rules. (for reference: (https://github.com/claranet/terraform-azurerm-eventhub/issues/1 ))
+
 # v7.3.0 - 2023-09-08
 
 Breaking
