@@ -60,16 +60,19 @@ output "namespace_default_secondary_key" {
 output "namespace_listen_authorization_rule" {
   description = "Event Hub Namespace listen only authorization rule."
   value       = try(azurerm_eventhub_namespace_authorization_rule.listen["enabled"], null)
+  sensitive   = true
 }
 
 output "namespace_send_authorization_rule" {
   description = "Event Hub Namespace send only authorization rule."
   value       = try(azurerm_eventhub_namespace_authorization_rule.send["enabled"], null)
+  sensitive   = true
 }
 
 output "namespace_manage_authorization_rule" {
   description = "Event Hub Namespace manage authorization rule."
   value       = try(azurerm_eventhub_namespace_authorization_rule.manage["enabled"], null)
+  sensitive   = true
 }
 
 output "consumer_groups" {
