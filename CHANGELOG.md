@@ -1,3 +1,70 @@
+## 7.4.0 (2024-10-03)
+
+### Features
+
+* use Claranet "azurecaf" provider cf1966d
+
+### Documentation
+
+* update README badge to use OpenTofu registry 66a42b7
+* update README with `terraform-docs` v0.19.0 a3ae954
+
+### Continuous Integration
+
+* **AZ-1391:** enable semantic-release [skip ci] d185a2d
+* **AZ-1391:** update semantic-release config [skip ci] 12bc7ba
+
+### Miscellaneous Chores
+
+* **deps:** add renovate.json 2c12546
+* **deps:** enable automerge on renovate fa036e5
+* **deps:** update dependency opentofu to v1.7.0 67a66ee
+* **deps:** update dependency opentofu to v1.7.1 a0c48b7
+* **deps:** update dependency opentofu to v1.7.2 a4435dc
+* **deps:** update dependency opentofu to v1.7.3 15f9beb
+* **deps:** update dependency opentofu to v1.8.0 bdb39e6
+* **deps:** update dependency opentofu to v1.8.1 0e4adc6
+* **deps:** update dependency pre-commit to v3.7.1 6763fe6
+* **deps:** update dependency pre-commit to v3.8.0 e37d6f5
+* **deps:** update dependency terraform-docs to v0.18.0 eaae6ed
+* **deps:** update dependency terraform-docs to v0.19.0 0644e2b
+* **deps:** update dependency tflint to v0.51.0 b33d060
+* **deps:** update dependency tflint to v0.51.1 275cdf4
+* **deps:** update dependency tflint to v0.51.2 ec6c709
+* **deps:** update dependency tflint to v0.52.0 8dd0aca
+* **deps:** update dependency tflint to v0.53.0 b7aabd9
+* **deps:** update dependency trivy to v0.50.2 7aa7b17
+* **deps:** update dependency trivy to v0.50.4 10caa66
+* **deps:** update dependency trivy to v0.51.0 c537c2a
+* **deps:** update dependency trivy to v0.51.1 9391c20
+* **deps:** update dependency trivy to v0.51.2 cd47360
+* **deps:** update dependency trivy to v0.51.4 5016d14
+* **deps:** update dependency trivy to v0.52.0 1d279f9
+* **deps:** update dependency trivy to v0.52.1 807bb59
+* **deps:** update dependency trivy to v0.52.2 d4b4cf6
+* **deps:** update dependency trivy to v0.53.0 12a5b43
+* **deps:** update dependency trivy to v0.54.1 88b55b4
+* **deps:** update dependency trivy to v0.55.0 940a3fc
+* **deps:** update dependency trivy to v0.55.1 3a86163
+* **deps:** update dependency trivy to v0.55.2 e67e941
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.17.0 32408c1
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.18.0 aa60131
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.92.0 f73e7be
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.92.1 ed35ec0
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.92.2 32e546e
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.92.3 a8674c6
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.93.0 0e83aff
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.94.0 1237585
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.94.1 c7465a3
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.94.3 2083821
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.95.0 fe3247c
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.96.0 b5fbcaf
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.96.1 de12046
+* **deps:** update renovate.json 8f7f448
+* **deps:** update tools 092cc55
+* **pre-commit:** update commitlint hook 7a07a4f
+* **release:** remove legacy `VERSION` file 3b72b7e
+
 # v7.3.0 - 2023-09-08
 
 Breaking
