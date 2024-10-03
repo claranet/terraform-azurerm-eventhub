@@ -136,11 +136,11 @@ module "eventhub" {
 | [azurerm_eventhub_namespace_authorization_rule.listen](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_namespace_authorization_rule) | resource |
 | [azurerm_eventhub_namespace_authorization_rule.manage](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_namespace_authorization_rule) | resource |
 | [azurerm_eventhub_namespace_authorization_rule.send](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_namespace_authorization_rule) | resource |
-| [azurecaf_name.consumer_group](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/data-sources/name) | data source |
-| [azurecaf_name.eventhub](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/data-sources/name) | data source |
-| [azurecaf_name.eventhub_auth_rule](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/data-sources/name) | data source |
-| [azurecaf_name.eventhub_namespace](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/data-sources/name) | data source |
-| [azurecaf_name.eventhub_namespace_auth_rule](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/data-sources/name) | data source |
+| [azurecaf_name.consumer_group](https://registry.terraform.io/providers/claranet/azurecaf/latest/docs/data-sources/name) | data source |
+| [azurecaf_name.eventhub](https://registry.terraform.io/providers/claranet/azurecaf/latest/docs/data-sources/name) | data source |
+| [azurecaf_name.eventhub_auth_rule](https://registry.terraform.io/providers/claranet/azurecaf/latest/docs/data-sources/name) | data source |
+| [azurecaf_name.eventhub_namespace](https://registry.terraform.io/providers/claranet/azurecaf/latest/docs/data-sources/name) | data source |
+| [azurecaf_name.eventhub_namespace_auth_rule](https://registry.terraform.io/providers/claranet/azurecaf/latest/docs/data-sources/name) | data source |
 
 ## Inputs
 
