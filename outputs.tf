@@ -1,80 +1,85 @@
-output "resource_group_name" {
-  description = "Azure Resource Group name."
-  value       = var.resource_group_name
+output "resource_eventhubs" {
+  description = "Azure Event Hubs resource objects."
+  value       = azurerm_eventhub.main
 }
 
-output "location" {
-  description = "Azure region."
-  value       = var.location
+output "resource_namespace" {
+  description = "Azure Event Hub Namespace resource object."
+  value       = azurerm_eventhub_namespace.main
 }
 
-output "environment" {
-  description = "Application environment."
-  value       = var.environment
+output "identity_principal_id" {
+  description = "Azure Event Hub Namespace system identity principal ID."
+  value       = try(azurerm_eventhub_namespace.main.identity[0].principal_id, null)
 }
 
-output "eventhubs" {
-  description = "Azure Event Hubs outputs."
-  value       = azurerm_eventhub.eventhub
+output "module_diagnostics" {
+  description = "Diagnostics settings module outputs."
+  value       = module.diagnostics
 }
 
 output "namespace_id" {
   description = "Azure Event Hub Namespace ID."
-  value       = azurerm_eventhub_namespace.eventhub.id
+  value       = azurerm_eventhub_namespace.main.id
 }
 
 output "namespace_name" {
   description = "Azure Event Hub Namespace name."
-  value       = azurerm_eventhub_namespace.eventhub.name
+  value       = azurerm_eventhub_namespace.main.name
 }
 
-output "namespace_default_authorization_rule_name" {
-  description = "Event Hub Namespace default authorization rule name."
-  value       = "RootManageSharedAccessKey"
+output "id" {
+  description = "Azure Event Hub Namespace ID."
+  value       = azurerm_eventhub_namespace.main.id
+}
+
+output "name" {
+  description = "Azure Event Hub Namespace name."
+  value       = azurerm_eventhub_namespace.main.name
 }
 
 output "namespace_default_primary_connection_string" {
   description = "Event Hub Namespace default primary connection string."
-  value       = azurerm_eventhub_namespace.eventhub.default_primary_connection_string
+  value       = azurerm_eventhub_namespace.main.default_primary_connection_string
   sensitive   = true
 }
 
 output "namespace_default_primary_key" {
   description = "Event Hub Namespace default primary key."
-  value       = azurerm_eventhub_namespace.eventhub.default_primary_key
+  value       = azurerm_eventhub_namespace.main.default_primary_key
   sensitive   = true
 }
 
 output "namespace_default_secondary_connection_string" {
   description = "Eventhub Namespace default secondary connection string."
-  value       = azurerm_eventhub_namespace.eventhub.default_secondary_connection_string
+  value       = azurerm_eventhub_namespace.main.default_secondary_connection_string
   sensitive   = true
 }
 
 output "namespace_default_secondary_key" {
   description = "Event Hub Namespace default secondary key."
-  value       = azurerm_eventhub_namespace.eventhub.default_secondary_key
+  value       = azurerm_eventhub_namespace.main.default_secondary_key
   sensitive   = true
 }
 
-output "namespace_listen_authorization_rule" {
-  description = "Event Hub Namespace listen only authorization rule."
-  value       = try(azurerm_eventhub_namespace_authorization_rule.listen["enabled"], null)
+output "resource_namespace_listen_authorization_rule" {
+  description = "Event Hub Namespace listen only authorization rule resource."
+  value       = one(azurerm_eventhub_namespace_authorization_rule.listen[*])
 }
 
-output "namespace_send_authorization_rule" {
-  description = "Event Hub Namespace send only authorization rule."
-  value       = try(azurerm_eventhub_namespace_authorization_rule.send["enabled"], null)
+output "resource_namespace_send_authorization_rule" {
+  description = "Event Hub Namespace send only authorization rule resource."
+  value       = one(azurerm_eventhub_namespace_authorization_rule.send[*])
 }
 
-output "namespace_manage_authorization_rule" {
-  description = "Event Hub Namespace manage authorization rule."
-  value       = try(azurerm_eventhub_namespace_authorization_rule.manage["enabled"], null)
+output "resource_namespace_manage_authorization_rule" {
+  description = "Event Hub Namespace manage authorization rule resource."
+  value       = one(azurerm_eventhub_namespace_authorization_rule.manage[*])
 }
 
-output "consumer_groups" {
-  description = "Azure Event Hub Consumer Groups."
-  value       = try(azurerm_eventhub_consumer_group.eventhub_consumer_group, null)
+output "resource_consumer_groups" {
+  description = "Azure Event Hub Consumer Groups resource objects."
+  value       = try(azurerm_eventhub_consumer_group.main, null)
 }
 
 output "hubs_listen_authorization_rule" {

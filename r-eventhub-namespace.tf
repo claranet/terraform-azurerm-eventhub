@@ -1,7 +1,7 @@
-resource "azurerm_eventhub_cluster" "cluster" {
-  for_each = toset(var.create_dedicated_cluster ? ["enabled"] : [])
+resource "azurerm_eventhub_cluster" "main" {
+  count = var.create_dedicated_cluster ? 1 : 0
 
-  name                = format("%s-cluster", local.namespace_name)
+  name                = format("%s-cluster", local.name)
   resource_group_name = var.resource_group_name
   location            = var.location
   sku_name            = "Dedicated_1"
@@ -9,22 +9,26 @@ resource "azurerm_eventhub_cluster" "cluster" {
   tags = local.tags
 }
 
-resource "azurerm_eventhub_namespace" "eventhub" {
-  name                = local.namespace_name
+moved {
+  from = azurerm_eventhub_cluster.cluster["enabled"]
+  to   = azurerm_eventhub_cluster.main[0]
+}
+
+resource "azurerm_eventhub_namespace" "main" {
+  name                = local.name
   resource_group_name = var.resource_group_name
   location            = var.location
 
   sku                  = var.namespace_parameters.sku
   capacity             = var.namespace_parameters.capacity
   auto_inflate_enabled = var.namespace_parameters.auto_inflate_enabled
-  dedicated_cluster_id = var.create_dedicated_cluster ? azurerm_eventhub_cluster.cluster["enabled"].id : var.namespace_parameters.dedicated_cluster_id
+  dedicated_cluster_id = var.create_dedicated_cluster ? one(azurerm_eventhub_cluster.main[*].id) : var.namespace_parameters.dedicated_cluster_id
 
   identity {
     type = "SystemAssigned"
   }
 
   maximum_throughput_units = var.namespace_parameters.maximum_throughput_units
-  zone_redundant           = var.namespace_parameters.zone_redundant
 
   dynamic "network_rulesets" {
     for_each = var.network_rules_enabled ? [local.networks_rules] : []
@@ -58,4 +62,9 @@ resource "azurerm_eventhub_namespace" "eventhub" {
   minimum_tls_version           = var.namespace_parameters.minimum_tls_version
 
   tags = local.tags
+}
+
+moved {
+  from = azurerm_eventhub_namespace.eventhub
+  to   = azurerm_eventhub_namespace.main
 }
