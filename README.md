@@ -124,7 +124,7 @@ module "eventhub" {
 
 | Name | Source | Version |
 |------|--------|---------|
-| diagnostics | claranet/diagnostic-settings/azurerm | ~> 7.0.0 |
+| diagnostics | claranet/diagnostic-settings/azurerm | ~> 8.0.0 |
 
 ## Resources
 
