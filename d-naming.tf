@@ -2,8 +2,8 @@ data "azurecaf_name" "eventhub_namespace" {
   name          = var.stack
   resource_type = "azurerm_eventhub_namespace"
   prefixes      = var.name_prefix == "" ? null : [local.name_prefix]
-  suffixes      = compact([var.client_name, var.location_short, var.environment, local.name_suffix, var.use_caf_naming ? "" : "eh"])
-  use_slug      = var.use_caf_naming
+  suffixes      = compact([var.client_name, var.location_short, var.environment, local.name_suffix])
+  use_slug      = true
   clean_input   = true
   separator     = "-"
 }
@@ -15,7 +15,7 @@ data "azurecaf_name" "eventhub" {
   resource_type = "azurerm_eventhub"
   prefixes      = var.name_prefix == "" ? null : [local.name_prefix]
   suffixes      = compact([var.client_name, var.location_short, var.environment, each.key, local.name_suffix])
-  use_slug      = var.use_caf_naming
+  use_slug      = true
   clean_input   = true
   separator     = "-"
 }
@@ -26,8 +26,8 @@ data "azurecaf_name" "consumer_group" {
   name          = var.stack
   resource_type = "azurerm_eventhub_consumer_group"
   prefixes      = var.name_prefix == "" ? null : [local.name_prefix]
-  suffixes      = compact([var.client_name, var.location_short, var.environment, each.key, local.name_suffix, var.use_caf_naming ? "" : "ehcg"])
-  use_slug      = var.use_caf_naming
+  suffixes      = compact([var.client_name, var.location_short, var.environment, each.key, local.name_suffix])
+  use_slug      = true
   clean_input   = true
   separator     = "-"
 }
@@ -39,7 +39,7 @@ data "azurecaf_name" "eventhub_namespace_auth_rule" {
   resource_type = "azurerm_eventhub_namespace_authorization_rule"
   prefixes      = var.name_prefix == "" ? null : [local.name_prefix]
   suffixes      = compact([var.client_name, var.location_short, var.environment, each.key, local.name_suffix])
-  use_slug      = var.use_caf_naming
+  use_slug      = true
   clean_input   = true
   separator     = "-"
 }
@@ -51,7 +51,7 @@ data "azurecaf_name" "eventhub_auth_rule" {
   resource_type = "azurerm_eventhub_authorization_rule"
   prefixes      = var.name_prefix == "" ? null : [local.name_prefix]
   suffixes      = compact([var.client_name, var.location_short, var.environment, each.value, local.name_suffix])
-  use_slug      = var.use_caf_naming
+  use_slug      = true
   clean_input   = true
   separator     = "-"
 }

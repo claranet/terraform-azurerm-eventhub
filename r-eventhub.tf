@@ -1,8 +1,8 @@
-resource "azurerm_eventhub" "eventhub" {
+resource "azurerm_eventhub" "main" {
   for_each = try(var.hubs_parameters, {})
 
   name                = coalesce(each.value.custom_name, data.azurecaf_name.eventhub[each.key].result)
-  namespace_name      = azurerm_eventhub_namespace.eventhub.name
+  namespace_name      = azurerm_eventhub_namespace.main.name
   resource_group_name = var.resource_group_name
 
   message_retention = each.value.message_retention
@@ -34,13 +34,23 @@ resource "azurerm_eventhub" "eventhub" {
   }
 }
 
-resource "azurerm_eventhub_consumer_group" "eventhub_consumer_group" {
+moved {
+  from = azurerm_eventhub.eventhub
+  to   = azurerm_eventhub.main
+}
+
+resource "azurerm_eventhub_consumer_group" "main" {
   for_each = { for h, cp in var.hubs_parameters : h => cp if cp.consumer_group.enabled }
 
-  eventhub_name       = azurerm_eventhub.eventhub[each.key].name
+  eventhub_name       = azurerm_eventhub.main[each.key].name
   name                = coalesce(each.value.consumer_group.custom_name, data.azurecaf_name.consumer_group[each.key].result)
-  namespace_name      = azurerm_eventhub_namespace.eventhub.name
+  namespace_name      = azurerm_eventhub_namespace.main.name
   resource_group_name = var.resource_group_name
 
   user_metadata = each.value.consumer_group.user_metadata
+}
+
+moved {
+  from = azurerm_eventhub_consumer_group.eventhub_consumer_group
+  to   = azurerm_eventhub_consumer_group.main
 }
