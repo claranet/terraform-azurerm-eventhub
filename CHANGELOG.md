@@ -1,3 +1,25 @@
+## 8.0.1 (2025-01-21)
+
+### Bug Fixes
+
+* **AZ-1498:** moved block azurerm_eventhub_namespace_authorization_rule 9e0cadb
+
+### Miscellaneous Chores
+
+* **deps:** update dependency opentofu to v1.8.6 9e536a6
+* **deps:** update dependency opentofu to v1.8.8 f87f5b5
+* **deps:** update dependency opentofu to v1.9.0 1679939
+* **deps:** update dependency pre-commit to v4.1.0 2fae12c
+* **deps:** update dependency tflint to v0.54.0 5cd6e46
+* **deps:** update dependency tflint to v0.55.0 bb8c20c
+* **deps:** update dependency trivy to v0.57.1 d256e80
+* **deps:** update dependency trivy to v0.58.1 547b8df
+* **deps:** update dependency trivy to v0.58.2 a4e00e1
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.19.0 fb944f2
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.20.0 e56921d
+* **deps:** update tools 8c530e3
+* update tflint config for v0.55.0 8047812
+
 ## 8.0.0 (2024-11-08)
 
 ### ⚠ BREAKING CHANGES
