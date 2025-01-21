@@ -11,8 +11,8 @@ resource "azurerm_eventhub_namespace_authorization_rule" "listen" {
 }
 
 moved {
-  from = azurerm_eventhub_authorization_rule.listen["enabled"]
-  to   = azurerm_eventhub_authorization_rule.listen[0]
+  from = azurerm_eventhub_namespace_authorization_rule.listen["enabled"]
+  to   = azurerm_eventhub_namespace_authorization_rule.listen[0]
 }
 
 resource "azurerm_eventhub_namespace_authorization_rule" "send" {
@@ -28,8 +28,8 @@ resource "azurerm_eventhub_namespace_authorization_rule" "send" {
 }
 
 moved {
-  from = azurerm_eventhub_authorization_rule.send["enabled"]
-  to   = azurerm_eventhub_authorization_rule.send[0]
+  from = azurerm_eventhub_namespace_authorization_rule.send["enabled"]
+  to   = azurerm_eventhub_namespace_authorization_rule.send[0]
 }
 
 resource "azurerm_eventhub_namespace_authorization_rule" "manage" {
@@ -45,6 +45,6 @@ resource "azurerm_eventhub_namespace_authorization_rule" "manage" {
 }
 
 moved {
-  from = azurerm_eventhub_authorization_rule.manage["enabled"]
-  to   = azurerm_eventhub_authorization_rule.manage[0]
+  from = azurerm_eventhub_namespace_authorization_rule.manage["enabled"]
+  to   = azurerm_eventhub_namespace_authorization_rule.manage[0]
 }
