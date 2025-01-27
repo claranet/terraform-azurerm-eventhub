@@ -1,9 +1,8 @@
 resource "azurerm_eventhub" "main" {
   for_each = try(var.hubs_parameters, {})
 
-  name                = coalesce(each.value.custom_name, data.azurecaf_name.eventhub[each.key].result)
-  namespace_name      = azurerm_eventhub_namespace.main.name
-  resource_group_name = var.resource_group_name
+  name         = coalesce(each.value.custom_name, data.azurecaf_name.eventhub[each.key].result)
+  namespace_id = azurerm_eventhub_namespace.main.id
 
   message_retention = each.value.message_retention
   partition_count   = each.value.partition_count
