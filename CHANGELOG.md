@@ -1,3 +1,13 @@
+## 8.1.0 (2025-01-31)
+
+### Features
+
+* **AZ-1503:** add namespace_id for eventhub resource d26a45a
+
+### Miscellaneous Chores
+
+* **deps:** update dependency trivy to v0.59.0 909c35f
+
 ## 8.0.1 (2025-01-21)
 
 ### Bug Fixes
