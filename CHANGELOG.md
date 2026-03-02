@@ -1,3 +1,36 @@
+## 8.1.2 (2026-03-02)
+
+### Code Refactoring
+
+* **gitlab MR template:** ♻️ update default reviewers group with Azure Factory 🔧 b4b4629
+
+### Miscellaneous Chores
+
+* 🔧 add prevent_destroy on namesp�ace d406c65
+* **deps:** 🔗 bump tflint rules version 34ed564
+* **deps:** update dependency opentofu to v1.10.7 dbd922d
+* **deps:** update dependency opentofu to v1.11.2 d7eb6d1
+* **deps:** update dependency opentofu to v1.11.3 7bec550
+* **deps:** update dependency opentofu to v1.11.4 264058d
+* **deps:** update dependency pre-commit to v4.4.0 cff5382
+* **deps:** update dependency pre-commit to v4.5.0 7ddb885
+* **deps:** update dependency pre-commit to v4.5.1 bdc1422
+* **deps:** update dependency tflint to v0.60.0 ee7afd2
+* **deps:** update dependency tflint to v0.61.0 01169ad
+* **deps:** update dependency trivy to v0.67.2 910710e
+* **deps:** update dependency trivy to v0.68.1 9d47f93
+* **deps:** update dependency trivy to v0.68.2 87d8b8c
+* **deps:** update dependency trivy to v0.69.0 8f07d69
+* **deps:** update dependency trivy to v0.69.1 c887420
+* **deps:** update pre-commit hook crate-ci/committed to v1.1.10 f2c5cb3
+* **deps:** update pre-commit hook crate-ci/committed to v1.1.11 26a9c9b
+* **deps:** update pre-commit hook crate-ci/committed to v1.1.8 0d0e2fa
+* **deps:** update pre-commit hook crate-ci/committed to v1.1.9 15b9d9a
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.2.2 fd45405
+* **deps:** update tools 0863d8b
+* **deps:** update tools c223786
+* merge remote-tracking branch 'origin/renovate/crate-ci-committed-1.x' 84b9b44
+
 ## 8.1.1 (2025-10-09)
 
 ### Documentation
