@@ -62,6 +62,10 @@ resource "azurerm_eventhub_namespace" "main" {
   minimum_tls_version           = var.namespace_parameters.minimum_tls_version
 
   tags = local.tags
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 moved {
