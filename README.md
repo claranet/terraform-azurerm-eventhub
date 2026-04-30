@@ -87,20 +87,20 @@ module "eventhub" {
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | azurecaf | >= 1.2.28 |
 | azurerm | ~> 4.31 |
 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | diagnostics | claranet/diagnostic-settings/azurerm | ~> 8.2.0 |
 
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azurerm_eventhub.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub) | resource |
 | [azurerm_eventhub_authorization_rule.listen](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_authorization_rule) | resource |
 | [azurerm_eventhub_authorization_rule.manage](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventhub_authorization_rule) | resource |
@@ -120,7 +120,7 @@ module "eventhub" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | allowed\_cidrs | List of CIDR to allow access to that EventHub Namespace. | `list(string)` | `[]` | no |
 | allowed\_subnet\_ids | Subnets to allow access to that EventHub Namespace. | `list(string)` | `[]` | no |
 | client\_name | Client name/account used in naming. | `string` | n/a | yes |
@@ -150,7 +150,7 @@ module "eventhub" {
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | hubs\_listen\_authorization\_rule | Event Hubs listen only authorization rules. |
 | hubs\_manage\_authorization\_rule | Event Hubs Namespace manage authorization rules. |
 | hubs\_send\_authorization\_rule | Event Hubs send only authorization rules. |
