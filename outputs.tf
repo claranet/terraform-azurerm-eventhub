@@ -1,11 +1,13 @@
 output "resource_eventhubs" {
   description = "Azure Event Hubs resource objects."
   value       = azurerm_eventhub.main
+  sensitive   = true
 }
 
 output "resource_namespace" {
   description = "Azure Event Hub Namespace resource object."
   value       = azurerm_eventhub_namespace.main
+  sensitive   = true
 }
 
 output "identity_principal_id" {
